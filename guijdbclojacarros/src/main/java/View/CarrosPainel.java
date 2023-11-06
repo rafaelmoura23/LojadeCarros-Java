@@ -32,7 +32,7 @@ public class CarrosPainel extends JPanel {
     private JLabel labelValor;
     private DefaultTableModel tableModel; // lógica
     private JTable table; // visual
-    private List<Carros> carro = new ArrayList<>();
+    private List<Carros> carrosVenda = new ArrayList<>();
     private int linhaSelecionada = -1;
     private JButton cadastrarButton, atualizarButton, apagarButton, editarButton;
 
@@ -41,6 +41,7 @@ public class CarrosPainel extends JPanel {
 
         JPanel painel1 = new JPanel(new BorderLayout());
         JPanel inputPanel = new JPanel();
+        JPanel buttons = new JPanel();
 
         // construir a tabela
         tableModel = new DefaultTableModel();
@@ -90,13 +91,14 @@ public class CarrosPainel extends JPanel {
         inputPanel.add(labelValor);
         inputPanel.add(inputValor);
 
-        inputPanel.add(cadastrarButton);
-        inputPanel.add(atualizarButton);
-        inputPanel.add(apagarButton);
+        buttons.add(cadastrarButton);
+        buttons.add(atualizarButton);
+        buttons.add(apagarButton);
 
         this.add(painel1);
         painel1.add(scrollPane, BorderLayout.CENTER);
         painel1.add(inputPanel, BorderLayout.NORTH);
+        painel1.add(buttons, BorderLayout.SOUTH);
 
 
 
