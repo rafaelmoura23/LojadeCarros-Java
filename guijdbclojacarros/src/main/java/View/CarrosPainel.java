@@ -92,8 +92,10 @@ public class CarrosPainel extends JPanel {
         inputPanel.add(inputValor);
 
         buttons.add(cadastrarButton);
+        buttons.add(editarButton);
         buttons.add(atualizarButton);
         buttons.add(apagarButton);
+        
 
         this.add(painel1);
         painel1.add(scrollPane, BorderLayout.CENTER);
