@@ -8,14 +8,16 @@ public class Carros {
     private int ano;
     private String cor;
     private String placa;
+    private String valor;
 
     // construtor cheio
-    public Carros(String marca, String modelo, int ano, String cor, String placa) {
+    public Carros(String marca, String modelo, int ano, String cor, String placa, String valor) {
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
         this.cor = cor;
         this.placa = placa;
+        this.valor = valor;
     }
 
     // métodos getters and setters
@@ -57,6 +59,14 @@ public class Carros {
 
     public void setPlaca(String placa) {
         this.placa = placa;
+    }
+
+    public String getValor(){
+        return valor;
+    }
+
+    public void setValor(String valor){
+        this.valor = valor;
     }
 
 }
