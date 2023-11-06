@@ -7,11 +7,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+import java.util.List;
+
+import Model.Carros;
 
 import java.awt.*;
-import java.util.ArrayList;
 
-public class CarrosPainel extends JPanel{
+public class CarrosPainel extends JPanel {
     // atributos - componentes
     // campo de texto - JTextField
     private JTextField inputPlaca;
@@ -20,24 +23,25 @@ public class CarrosPainel extends JPanel{
     private JTextField inputAno;
     private JTextField inputCor;
     private JTextField inputValor;
-    //campo escrito - JLabel
+    // campo escrito - JLabel
     private JLabel labelPlaca;
     private JLabel labelMarca;
     private JLabel labelModelo;
     private JLabel labelAno;
     private JLabel labelCor;
     private JLabel labelValor;
-    //private List<Agenda> agendas = new ArrayList<>();
+    private DefaultTableModel tableModel; // lógica
+    private JTable table; // visual
+    private List<Carros> carro = new ArrayList<>();
     private int linhaSelecionada = -1;
-    //tabela
-    private DefaultTableModel tableModel; //lógica
-    private JTable table; //visual
-    //botoes
-    private JButton cadastrarButton, atualizarButton, apagarButton; 
-
+    private JButton cadastrarButton, atualizarButton, apagarButton, editarButton;
 
     // construtor(GUI-JPanel)
     public CarrosPainel() {
+
+        JPanel painel1 = new JPanel(new BorderLayout());
+        JPanel inputPanel = new JPanel();
+
         // construir a tabela
         tableModel = new DefaultTableModel();
         tableModel.addColumn("Placa");
@@ -48,6 +52,7 @@ public class CarrosPainel extends JPanel{
         tableModel.addColumn("Valor");
         table = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setViewportView(table);
 
         // criar os componentes
         inputPlaca = new JTextField(10);
@@ -57,12 +62,21 @@ public class CarrosPainel extends JPanel{
         inputCor = new JTextField(10);
         inputValor = new JTextField(10);
 
+        // criar os componentes - labels
+        labelPlaca = new JLabel("Placa");
+        labelMarca = new JLabel("Marca");
+        labelModelo = new JLabel("Modelo");
+        labelAno = new JLabel("Ano");
+        labelCor = new JLabel("Cor");
+        labelValor = new JLabel("Valor");
+        // botões
         cadastrarButton = new JButton("Cadastrar");
         atualizarButton = new JButton("Atualizar");
         apagarButton = new JButton("Apagar");
+        editarButton = new JButton("Editar");
 
         // adicionar os componentes
-        JPanel inputPanel = new JPanel();
+
         inputPanel.add(labelPlaca);
         inputPanel.add(inputPlaca);
         inputPanel.add(labelMarca);
@@ -80,15 +94,9 @@ public class CarrosPainel extends JPanel{
         inputPanel.add(atualizarButton);
         inputPanel.add(apagarButton);
 
-
-
-        // set do layout
-        setLayout(new BorderLayout());
-        add(inputPanel, BorderLayout.NORTH);
-        add(scrollPane, BorderLayout.CENTER);
-
-
-
+        this.add(painel1);
+        painel1.add(scrollPane, BorderLayout.CENTER);
+        painel1.add(inputPanel, BorderLayout.NORTH);
 
 
 
@@ -97,5 +105,4 @@ public class CarrosPainel extends JPanel{
         // tabela de carros
     }
 
-    
 }

@@ -11,10 +11,11 @@ public class FramePrincipal extends JFrame {
         abas.add("Carros", new CarrosPainel());
         abas.add("Clientes", new ClientesPainel());
         abas.add("Vendas", new VendasPainel());
+        this.add(abas);
+        setBounds(100, 100, 600, 600);
     }
 
     public void run(){
-        pack();
         setVisible(true);
     }
     
