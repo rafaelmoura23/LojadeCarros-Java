@@ -3,15 +3,15 @@ package Model;
 public class Carros {
 
     // atributos
-    private String marca;
-    private String modelo;
-    private int ano;
-    private String cor;
-    private String placa;
-    private String valor;
+    public String marca;
+    public String modelo;
+    public String ano;
+    public String cor;
+    public String placa;
+    public String valor;
 
     // construtor cheio
-    public Carros(String marca, String modelo, int ano, String cor, String placa, String valor) {
+    public Carros(String marca, String modelo, String ano, String cor, String placa, String valor) {
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
@@ -37,11 +37,11 @@ public class Carros {
         this.modelo = modelo;
     }
 
-    public int getAno() {
+    public String getAno() {
         return ano;
     }
 
-    public void setAno(int ano) {
+    public void setAno(String ano) {
         this.ano = ano;
     }
 
