@@ -70,6 +70,7 @@ public class CarrosPainel extends JPanel {
         labelAno = new JLabel("Ano");
         labelCor = new JLabel("Cor");
         labelValor = new JLabel("Valor");
+
         // botões
         cadastrarButton = new JButton("Cadastrar");
         atualizarButton = new JButton("Atualizar");
@@ -77,7 +78,6 @@ public class CarrosPainel extends JPanel {
         editarButton = new JButton("Editar");
 
         // adicionar os componentes
-
         inputPanel.add(labelPlaca);
         inputPanel.add(inputPlaca);
         inputPanel.add(labelMarca);
@@ -96,13 +96,10 @@ public class CarrosPainel extends JPanel {
         buttons.add(atualizarButton);
         buttons.add(apagarButton);
         
-
         this.add(painel1);
         painel1.add(scrollPane, BorderLayout.CENTER);
         painel1.add(inputPanel, BorderLayout.NORTH);
         painel1.add(buttons, BorderLayout.SOUTH);
-
-
 
         // entrada de dados
         // botões de eventos
