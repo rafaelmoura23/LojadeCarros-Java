@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Model.Carros;
 
+
 public class CarrosControl {
 
     // atributos
@@ -53,6 +54,9 @@ public class CarrosControl {
             tableModel.addRow(linha);
             }
     }
+
+
+    
 
 
 }

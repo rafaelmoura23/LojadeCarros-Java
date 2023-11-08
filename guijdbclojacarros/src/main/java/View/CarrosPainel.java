@@ -2,6 +2,7 @@ package View;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -11,8 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Model.Carros;
+import Controller.CarrosControl;
 
 import java.awt.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CarrosPainel extends JPanel {
     // atributos - componentes
@@ -95,7 +100,7 @@ public class CarrosPainel extends JPanel {
         buttons.add(editarButton);
         buttons.add(atualizarButton);
         buttons.add(apagarButton);
-        
+
         this.add(painel1);
         painel1.add(scrollPane, BorderLayout.CENTER);
         painel1.add(inputPanel, BorderLayout.NORTH);
@@ -104,6 +109,52 @@ public class CarrosPainel extends JPanel {
         // entrada de dados
         // botões de eventos
         // tabela de carros
+
+        // handlers
+        HandlerCadastrarCarro eventAddCarro = new HandlerCadastrarCarro();
+        cadastrarButton.addActionListener(eventAddCarro);
+
+        HandlerAtualizarCarro eventAtualizarCarro = new HandlerAtualizarCarro();
+        atualizarButton.addActionListener(eventAtualizarCarro);
+
+        HandlerApagarCarro eventApagarCarro = new HandlerApagarCarro();
+        apagarButton.addActionListener(eventApagarCarro);
+
+        HandlerEditarCarro eventEditarCarro = new HandlerEditarCarro();
+        editarButton.addActionListener(eventEditarCarro);
+
     }
+
+    // tratamento de eventos
+    public class HandlerCadastrarCarro implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JOptionPane.showMessageDialog(null, "Cadastro Efetuado com Sucesso");
+        }
+    }
+
+    public class HandlerAtualizarCarro implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JOptionPane.showMessageDialog(null, "Informações Atualizadas com Sucesso");
+        }
+    }
+
+    public class HandlerApagarCarro implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JOptionPane.showMessageDialog(null, "Carro Excluído com Sucesso");
+            
+        }
+    }
+
+    public class HandlerEditarCarro implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JOptionPane.showMessageDialog(null, "Carro Editado com Sucesso");
+        
+        }
+    }
+
 
 }
