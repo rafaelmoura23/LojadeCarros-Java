@@ -8,16 +8,21 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import org.w3c.dom.events.MouseEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import Model.Carros;
 import Controller.CarrosControl;
+import Controller.CarrosDAO;
 
 import java.awt.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 
 public class CarrosPainel extends JPanel {
     // atributos - componentes
@@ -106,56 +111,31 @@ public class CarrosPainel extends JPanel {
         painel1.add(inputPanel, BorderLayout.NORTH);
         painel1.add(buttons, BorderLayout.SOUTH);
 
-        // entrada de dados
-        // botões de eventos
-        // tabela de carros
+        //Cria o banco de dados caso não tenha sido criado 
+        new CarrosDAO().criaTabela();
 
-        // handlers
-        HandlerCadastrarCarro eventAddCarro = new HandlerCadastrarCarro();
-        cadastrarButton.addActionListener(eventAddCarro);
+        // incluindo elementos do banco na criação do painel
+        atualizarTabela();
 
-        HandlerAtualizarCarro eventAtualizarCarro = new HandlerAtualizarCarro();
-        atualizarButton.addActionListener(eventAtualizarCarro);
+         // tratamento de Eventos
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                linhaSelecionada = table.rowAtPoint(evt.getPoint());
+                if (linhaSelecionada != -1) {
+                    inputPlaca.setText((String) table.getValueAt(linhaSelecionada, 0));
+                    inputMarca.setText((String) table.getValueAt(linhaSelecionada, 1));
+                    inputModelo.setText((String) table.getValueAt(linhaSelecionada, 2));
+                    inputAno.setText((String) table.getValueAt(linhaSelecionada, 3));
+                    inputCor.setText((String) table.getValueAt(linhaSelecionada, 4));
+                    inputValor.setText((String) table.getValueAt(linhaSelecionada, 5));
+                }
+            }
+        });
 
-        HandlerApagarCarro eventApagarCarro = new HandlerApagarCarro();
-        apagarButton.addActionListener(eventApagarCarro);
-
-        HandlerEditarCarro eventEditarCarro = new HandlerEditarCarro();
-        editarButton.addActionListener(eventEditarCarro);
-
-    }
-
-    // tratamento de eventos
-    public class HandlerCadastrarCarro implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(null, "Cadastro Efetuado com Sucesso");
-            
-        }
-    }
-
-    public class HandlerAtualizarCarro implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(null, "Informações Atualizadas com Sucesso");
-        }
-    }
-
-    public class HandlerApagarCarro implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(null, "Carro Excluído com Sucesso");
-            
-        }
-    }
-
-    public class HandlerEditarCarro implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(null, "Carro Editado com Sucesso");
-        
-        }
-    }
+         // Cria um objeto operacoes da classe CarrosControl para executar operações no banco de dados
+         CarrosControl operacoes = new CarrosControl(carros, tableModel, table);
 
 
+}
 }
