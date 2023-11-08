@@ -3,11 +3,11 @@ package Model;
 public class Carros {
 
     // atributos
-    public String marca;
-    public String modelo;
-    public String ano;
-    public String placa;
-    public String valor;
+    private String marca;
+    private String modelo;
+    private String ano;
+    private String placa;
+    private String valor;
 
     // construtor cheio
     public Carros(String marca, String modelo, String ano, String placa, String valor) {

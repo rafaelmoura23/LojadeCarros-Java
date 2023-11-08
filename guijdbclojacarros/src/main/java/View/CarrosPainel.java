@@ -13,13 +13,15 @@ import org.w3c.dom.events.MouseEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 import Model.Carros;
+import javafx.event.ActionEvent;
 import Controller.CarrosControl;
 import Controller.CarrosDAO;
 
 import java.awt.*;
-
+import java.awt.event.*;
 
 public class CarrosPainel extends JPanel {
     // atributos - componentes
@@ -100,6 +102,27 @@ public class CarrosPainel extends JPanel {
         painel1.add(scrollPane, BorderLayout.CENTER);
         painel1.add(inputPanel, BorderLayout.NORTH);
         painel1.add(buttons, BorderLayout.SOUTH);
+
+        // cadastrar carros
+        HandlerAddCarro eventAddCarro = new HandlerAddCarro();
+        cadastrarButton.addActionListener(eventAddCarro);
+
+    }
+
+    CarrosControl operacoes = new CarrosControl(carros, tableModel, table);
+
+    public class HandlerAddCarro implements ActionListener {
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent e) {
+            operacoes.cadastrar(inputMarca.getText(), inputModelo.getText(), inputAno.getText(),
+inputPlaca.getText(), inputValor.getText());
+            // Limpa os campos de entrada após a operação de cadastro
+            inputMarca.setText("");
+            inputModelo.setText("");
+            inputAno.setText("");
+            inputPlaca.setText("");
+            inputValor.setText("");
+        }
 
     }
 }
