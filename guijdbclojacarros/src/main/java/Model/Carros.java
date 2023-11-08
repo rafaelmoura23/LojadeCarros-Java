@@ -6,16 +6,14 @@ public class Carros {
     public String marca;
     public String modelo;
     public String ano;
-    public String cor;
     public String placa;
     public String valor;
 
     // construtor cheio
-    public Carros(String marca, String modelo, String ano, String cor, String placa, String valor) {
+    public Carros(String marca, String modelo, String ano, String placa, String valor) {
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
-        this.cor = cor;
         this.placa = placa;
         this.valor = valor;
     }
@@ -43,14 +41,6 @@ public class Carros {
 
     public void setAno(String ano) {
         this.ano = ano;
-    }
-
-    public String getCor() {
-        return cor;
-    }
-
-    public void setCor(String cor) {
-        this.cor = cor;
     }
 
     public String getPlaca() {

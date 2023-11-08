@@ -35,17 +35,17 @@ public class CarrosControl {
     }
 
     // Cadastrar Carros
-    public void cadastrarCarros(String marca, String modelo, String ano, String Cor, String placa, String valor) {
+    public void cadastrarCarros(String marca, String modelo, String ano, String placa, String valor) {
         // new CarrosDAO().inserir(marca, modelo, ano, placa, valor);
-        Carros carro = new Carros(marca, modelo, ano, Cor, placa, valor);
+        Carros carro = new Carros(marca, modelo, ano, placa, valor);
         carros.add(carro);
         atualizarTabela();
     }
 
-    public void atualizarCarros(int linhaSelecionada, String marca, String modelo, String ano, String Cor, String placa,
+    public void atualizarCarros(int linhaSelecionada, String marca, String modelo, String ano, String placa,
             String valor) {
         if (linhaSelecionada != -1) {
-            Carros carro = new Carros(marca, modelo, ano, Cor, placa, valor);
+            Carros carro = new Carros(marca, modelo, ano, placa, valor);
             carros.add(carro);
             atualizarTabela();
         }
