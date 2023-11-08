@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -76,7 +77,8 @@ public class CarrosPainel extends JPanel {
         jSPane.setViewportView(table);
 
         //Cria o banco de dados caso não tenha sido criado 
-        //new CarrosDAO().criaTabela();
+
+        new CarrosDAO().criaTabela();
 
         // incluindo elementos do banco na criação do painel
         atualizarTabela();
@@ -107,12 +109,16 @@ public class CarrosPainel extends JPanel {
                 operacoes.cadastrar(carMarcaField.getText(), carModeloField.getText(), carAnoField.getText(),
                         carPlacaField.getText(), carValorField.getText());
 
+                JOptionPane.showMessageDialog(null, "O Carro " + carModeloField.getText() + " de placa " + carPlacaField.getText()  +  " foi Cadastrado com Sucesso!");
+
                 // Limpa os campos de entrada após a operação de cadastro
                 carMarcaField.setText("");
                 carModeloField.setText("");
                 carAnoField.setText("");
                 carPlacaField.setText("");
                 carValorField.setText("");
+
+
             }
         });
 
@@ -121,9 +127,11 @@ public class CarrosPainel extends JPanel {
         editar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try{
                     Robot robo = new Robot();
-                    robo.keyPress(KeyEvent.VK_TAB);
-                    
+
+                    robo.keyPress(KeyEvent.VK_ENTER);
+                    robo.keyRelease(KeyEvent.VK_ENTER);
                 // Chama o método "atualizar" do objeto operacoes com os valores dos campos de entrada
                 operacoes.atualizar((String) table.getValueAt(linhaSelecionada,0),
                 (String) table.getValueAt(linhaSelecionada,1),
@@ -137,7 +145,11 @@ public class CarrosPainel extends JPanel {
                 carAnoField.setText("");
                 carPlacaField.setText("");
                 carValorField.setText("");
-            } 
+                JOptionPane.showMessageDialog(null,"Informação editada com Sucesso!");
+            } catch(AWTException ex){
+                ex.printStackTrace();
+            }
+        }
         });
 
         // Configura a ação do botão "apagar" para excluir um registro no banco de dados
@@ -147,6 +159,7 @@ public class CarrosPainel extends JPanel {
                 // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada
                 // "placa"
                 operacoes.apagar(carPlacaField.getText());
+                JOptionPane.showMessageDialog(null, "O Carro " + carModeloField.getText() + " de placa " + carPlacaField.getText()  +  " foi deletado!");
 
                 // Limpa os campos de entrada após a operação de exclusão
                 carMarcaField.setText("");
