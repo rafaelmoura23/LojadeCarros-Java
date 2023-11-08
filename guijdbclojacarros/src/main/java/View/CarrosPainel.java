@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import Controller.CarrosControl;
 import Controller.CarrosDAO;
 
+import java.awt.AWTException;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -115,11 +116,14 @@ public class CarrosPainel extends JPanel {
             }
         });
 
+
         // Configura a ação do botão "editar" para atualizar um registro no banco de dados
         editar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                table.changeSelection(1, 1, false, false); 
+                    Robot robo = new Robot();
+                    robo.keyPress(KeyEvent.VK_TAB);
+                    
                 // Chama o método "atualizar" do objeto operacoes com os valores dos campos de entrada
                 operacoes.atualizar((String) table.getValueAt(linhaSelecionada,0),
                 (String) table.getValueAt(linhaSelecionada,1),
@@ -133,7 +137,7 @@ public class CarrosPainel extends JPanel {
                 carAnoField.setText("");
                 carPlacaField.setText("");
                 carValorField.setText("");
-            }
+            } 
         });
 
         // Configura a ação do botão "apagar" para excluir um registro no banco de dados
@@ -166,5 +170,7 @@ public class CarrosPainel extends JPanel {
         }
 
     }
+
+
 
 }
