@@ -118,8 +118,8 @@ public class CarrosPainel extends JPanel {
                     operacoes.cadastrar(carMarcaField.getText(), carModeloField.getText(), carAnoField.getText(),
                             carPlacaField.getText(), carValorField.getText());
 
-                    JOptionPane.showMessageDialog(null, "O Carro " + carModeloField.getText() + " de placa "
-                            + carPlacaField.getText() + " foi Cadastrado com Sucesso!");
+                    JOptionPane.showMessageDialog(null, "Você Cadastrou o carro " + carModeloField.getText() + " de placa "
+                            + carPlacaField.getText());
 
                     // Limpa os campos de entrada após a operação de cadastro
                     carMarcaField.setText("");
@@ -139,14 +139,7 @@ public class CarrosPainel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (carPlacaField.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Selecione algo para editar");
-                }
-                try {
-                    Robot robo = new Robot();
-
-                    robo.keyPress(KeyEvent.VK_ENTER);
-                    robo.keyRelease(KeyEvent.VK_ENTER);
-                    // Chama o método "atualizar" do objeto operacoes com os valores dos campos de
-                    // entrada
+                } else{
                     operacoes.atualizar((String) table.getValueAt(linhaSelecionada, 0),
                             (String) table.getValueAt(linhaSelecionada, 1),
                             (String) table.getValueAt(linhaSelecionada, 2),
@@ -160,9 +153,8 @@ public class CarrosPainel extends JPanel {
                     carPlacaField.setText("");
                     carValorField.setText("");
                     JOptionPane.showMessageDialog(null, "Informação editada com Sucesso!");
-                } catch (AWTException ex) {
-                    ex.printStackTrace();
                 }
+                
             }
         });
 
