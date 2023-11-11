@@ -26,7 +26,6 @@ import java.awt.event.ActionEvent;
 import Model.Carros;
 
 import java.lang.Object;
-import java.awt.Robot;
 
 public class CarrosPainel extends JPanel {
     // Atributos(componentes)
@@ -101,6 +100,8 @@ public class CarrosPainel extends JPanel {
         // Cria um objeto operacoes da classe CarrosControl para executar operações no
         // banco de dados
         CarrosControl operacoes = new CarrosControl(carros, tableModel, table);
+
+
 
         // Configura a ação do botão "cadastrar" para adicionar um novo registro no
         // banco de dados
