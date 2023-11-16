@@ -221,7 +221,5 @@ public class ClientesPainel extends JPanel {
         for (Clientes cliente : clientes) {
             tableModel.addRow(new Object[] { cliente.getCpf(), cliente.getNome(), cliente.getTelefone(), cliente.getCidade()});
         }
-
     }
-
 }

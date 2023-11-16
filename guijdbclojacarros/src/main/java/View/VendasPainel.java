@@ -150,7 +150,7 @@ public class VendasPainel extends JPanel {
         atualizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new VendasPainel().repaint();
+                
             }
         });
 
