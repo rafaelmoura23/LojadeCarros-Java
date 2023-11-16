@@ -3,6 +3,7 @@ package View;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -46,9 +47,11 @@ public class ClientesPainel extends JPanel {
     private JButton cadastrarButton, atualizarButton, apagarButton, editarButton;
 
     public ClientesPainel() {
-        JPanel painel1 = new JPanel(new BorderLayout());
+        JPanel painel1 = new JPanel();
         JPanel inputPanel = new JPanel();
         JPanel buttons = new JPanel();
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        painel1.setLayout(new BorderLayout());
 
         // construir a tabela
         tableModel = new DefaultTableModel();
@@ -156,10 +159,8 @@ public class ClientesPainel extends JPanel {
                 if (inputCpf.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Selecione algo para editar");
                 } else{
-                    operacoes.atualizar((String) table.getValueAt(linhaSelecionada, 0),
-                            (String) table.getValueAt(linhaSelecionada, 1),
-                            (String) table.getValueAt(linhaSelecionada, 2),
-                            (String) table.getValueAt(linhaSelecionada, 3));
+                    operacoes.atualizar(labelCpf.getText(), labelNome.getText(),
+                                        labelTelefone.getText(), labelCidade.getText());
 
                     // Limpa os campos de entrada após a operação de atualização
                     inputCpf.setText("");

@@ -141,11 +141,8 @@ public class CarrosPainel extends JPanel {
                 if (carPlacaField.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Selecione algo para editar");
                 } else{
-                    operacoes.atualizar((String) table.getValueAt(linhaSelecionada, 0),
-                            (String) table.getValueAt(linhaSelecionada, 1),
-                            (String) table.getValueAt(linhaSelecionada, 2),
-                            (String) table.getValueAt(linhaSelecionada, 3),
-                            (String) table.getValueAt(linhaSelecionada, 4));
+                    operacoes.atualizar(carMarcaField.getText(), carModeloField.getText(),
+                        carAnoField.getText(), carPlacaField.getText(), carValorField.getText());
 
                     // Limpa os campos de entrada após a operação de atualização
                     carMarcaField.setText("");
