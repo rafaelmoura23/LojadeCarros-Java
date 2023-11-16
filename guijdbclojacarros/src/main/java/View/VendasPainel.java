@@ -44,18 +44,19 @@ public class VendasPainel extends JPanel {
     private List<Carros> carros;
     private List<Clientes> clientes;
     private int linhaSelecionada = -1;
-    private JButton cadastrarButton, atualizarButton, apagarButton, editarButton;
+    private JButton cadastrarButton, apagarButton, editarButton;
 
 
-    private JComboBox<String> carrosComboBox;
-    private JComboBox<String> clientesComboBox;
-
-
+    JComboBox<String> carrosComboBox;
+    JComboBox<String> clientesComboBox;
 
     public VendasPainel() {
         JPanel painel1 = new JPanel(new BorderLayout());
         JPanel inputPanel = new JPanel();
         JPanel buttons = new JPanel();
+
+        carrosComboBox = new JComboBox<>();
+        clientesComboBox = new JComboBox<>();
 
         // construir a tabela
         tableModel = new DefaultTableModel();
@@ -81,7 +82,6 @@ public class VendasPainel extends JPanel {
 
         // botões
         cadastrarButton = new JButton("Cadastrar");
-        atualizarButton = new JButton("Atualizar");
         apagarButton = new JButton("Apagar");
         editarButton = new JButton("Editar");
 
@@ -90,14 +90,12 @@ public class VendasPainel extends JPanel {
         inputPanel.add(inputCliente);
         inputPanel.add(labelData);
         inputPanel.add(inputData);
-        inputPanel.add(labelCarro);
-        inputPanel.add(inputCarro);
+
         inputPanel.add(labelValor);
         inputPanel.add(inputValor);
 
         buttons.add(cadastrarButton);
         buttons.add(editarButton);
-        buttons.add(atualizarButton);
         buttons.add(apagarButton);
 
         this.add(painel1);
@@ -105,22 +103,17 @@ public class VendasPainel extends JPanel {
         painel1.add(inputPanel, BorderLayout.NORTH);
         painel1.add(buttons, BorderLayout.SOUTH);
 
-
-        List<String> carroMM = new ArrayList<>();
         carros = new CarrosDAO().listarTodos();
         for (Carros carro : carros) {
-            String marcaModelo = carro.getModelo() + carro.getMarca();
-            carroMM.add(marcaModelo);
+            carrosComboBox.addItem(carro.getMarca() + " " + carro.getModelo());
         }
 
-        List<String> clienteNC = new ArrayList<>();
         clientes = new ClientesDAO().listarTodos();
         for (Clientes cliente : clientes) {
-            String nameCPF = cliente.getNome() + cliente.getCpf();
-            clienteNC.add(nameCPF);
+            clientesComboBox.addItem(cliente.getNome() + " " + cliente.getCpf());
         }
 
-   
-
+        inputPanel.add(clientesComboBox);
+        inputPanel.add(carrosComboBox);
     }
 }
