@@ -12,7 +12,7 @@ public class FramePrincipal extends JFrame {
         abas.add("Clientes", new ClientesPainel());
         abas.add("Vendas", new VendasPainel());
         this.add(abas);
-        setBounds(300, 250, 1300, 600);
+        setBounds(300, 250, 1400, 600);
     }
 
     public void run(){

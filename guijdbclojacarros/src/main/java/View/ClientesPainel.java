@@ -44,7 +44,7 @@ public class ClientesPainel extends JPanel {
     private JTable table; // visual
     private List<Clientes> clientes = new ArrayList<>();
     private int linhaSelecionada = -1;
-    private JButton cadastrarButton, atualizarButton, apagarButton, editarButton;
+    private JButton cadastrarButton, apagarButton, editarButton;
 
     public ClientesPainel() {
         JPanel painel1 = new JPanel();
@@ -60,26 +60,47 @@ public class ClientesPainel extends JPanel {
         tableModel.addColumn("Telefone");
         tableModel.addColumn("Cidade");
         table = new JTable(tableModel);
+        table.setBackground(Color.LIGHT_GRAY);
+        table.setFont(new Font("Arial", Font.PLAIN, 16));
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setViewportView(table);
 
         // criar os componentes
         inputCpf = new JTextField(20);
+        inputCpf.setFont(new Font("Arial", Font.PLAIN, 16));
+
         inputNome = new JTextField(20);
+        inputNome.setFont(new Font("Arial", Font.PLAIN, 16));
+
         inputTelefone = new JTextField(20);
+        inputTelefone.setFont(new Font("Arial", Font.PLAIN, 16));
+
         inputCidade = new JTextField(20);
+        inputCidade.setFont(new Font("Arial", Font.PLAIN, 16));
 
         // criar os componentes - labels
-        labelCpf = new JLabel("Cpf");
+        labelCpf = new JLabel("CPF");
+        labelCpf.setFont(new Font("Arial", Font.PLAIN, 16));
+
         labelNome = new JLabel("Nome");
+        labelNome.setFont(new Font("Arial", Font.PLAIN, 16));
+
         labelTelefone = new JLabel("Telefone");
+        labelTelefone.setFont(new Font("Arial", Font.PLAIN, 16));
+
         labelCidade = new JLabel("Cidade");
+        labelCidade.setFont(new Font("Arial", Font.PLAIN, 16));
 
         // botões
         cadastrarButton = new JButton("Cadastrar");
-        atualizarButton = new JButton("Atualizar");
+        cadastrarButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        cadastrarButton.setBackground(Color.GREEN);
+
         apagarButton = new JButton("Apagar");
+        apagarButton.setFont(new Font("Arial", Font.PLAIN, 16));
+
         editarButton = new JButton("Editar");
+        editarButton.setFont(new Font("Arial", Font.PLAIN, 16));
 
         // adicionar os componentes
         inputPanel.add(labelCpf);
@@ -93,7 +114,6 @@ public class ClientesPainel extends JPanel {
 
         buttons.add(cadastrarButton);
         buttons.add(editarButton);
-        buttons.add(atualizarButton);
         buttons.add(apagarButton);
 
         this.add(painel1);
@@ -140,7 +160,7 @@ public class ClientesPainel extends JPanel {
                     operacoes.cadastrar(inputCpf.getText(), inputNome.getText(), inputTelefone.getText(),
                             inputCidade.getText());
 
-                    JOptionPane.showMessageDialog(null, "Você Cadastrou o cliente com sucesso! ");
+                    JOptionPane.showMessageDialog(null, "Você Cadastrou o cliente " + inputNome.getText() +  " com sucesso!");
 
                     // Limpa os campos de entrada após a operação de cadastro
                     inputCpf.setText("");
@@ -182,7 +202,7 @@ public class ClientesPainel extends JPanel {
                 } else {
                     // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada "placa"
                     operacoes.apagar(inputCpf.getText());
-                    JOptionPane.showMessageDialog(null, "O Cliente foi deletado!");
+                    JOptionPane.showMessageDialog(null, "O Cliente " +inputNome.getText() + " de CPF " + inputCpf.getText() + " foi deletado!");
 
                     // Limpa os campos de entrada após a operação de exclusão
                     inputCpf.setText("");

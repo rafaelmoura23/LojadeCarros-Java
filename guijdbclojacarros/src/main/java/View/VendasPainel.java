@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -11,9 +12,16 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import Controller.CarrosControl;
+import Controller.CarrosDAO;
+import Controller.ClientesDAO;
+
 import java.awt.*;
 
+import Model.Carros;
 import Model.Vendas;
+import Model.Clientes;
+
 
 public class VendasPainel extends JPanel {
     // atributos - componentes
@@ -32,9 +40,17 @@ public class VendasPainel extends JPanel {
 
     private DefaultTableModel tableModel; // lógica
     private JTable table; // visual
-    private List<Vendas> vendas = new ArrayList<>();
+    //private List<Vendas> vendas = new ArrayList<>();
+    private List<Carros> carros;
+    private List<Clientes> clientes;
     private int linhaSelecionada = -1;
     private JButton cadastrarButton, atualizarButton, apagarButton, editarButton;
+
+
+    private JComboBox<String> carrosComboBox;
+    private JComboBox<String> clientesComboBox;
+
+
 
     public VendasPainel() {
         JPanel painel1 = new JPanel(new BorderLayout());
@@ -88,5 +104,23 @@ public class VendasPainel extends JPanel {
         painel1.add(scrollPane, BorderLayout.CENTER);
         painel1.add(inputPanel, BorderLayout.NORTH);
         painel1.add(buttons, BorderLayout.SOUTH);
+
+
+        List<String> carroMM = new ArrayList<>();
+        carros = new CarrosDAO().listarTodos();
+        for (Carros carro : carros) {
+            String marcaModelo = carro.getModelo() + carro.getMarca();
+            carroMM.add(marcaModelo);
+        }
+
+        List<String> clienteNC = new ArrayList<>();
+        clientes = new ClientesDAO().listarTodos();
+        for (Clientes cliente : clientes) {
+            String nameCPF = cliente.getNome() + cliente.getCpf();
+            clienteNC.add(nameCPF);
+        }
+
+   
+
     }
 }
