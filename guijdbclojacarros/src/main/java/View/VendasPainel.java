@@ -75,7 +75,6 @@ public class VendasPainel extends JPanel {
         inputValor = new JTextField(10);
 
         // criar os componentes - labels
-        labelCliente = new JLabel("Cliente");
         labelData = new JLabel("Data");
         labelCarro = new JLabel("Carro");
         labelValor = new JLabel("Valor");
@@ -86,8 +85,6 @@ public class VendasPainel extends JPanel {
         editarButton = new JButton("Editar");
 
         // adicionar os componentes
-        inputPanel.add(labelCliente);
-        inputPanel.add(inputCliente);
         inputPanel.add(labelData);
         inputPanel.add(inputData);
 

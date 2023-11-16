@@ -5,11 +5,11 @@ public class Vendas {
     // atributos
     private String data;
     private String cliente;
-    private double valor;
+    private String valor;
     private String tipoCarro;
     
     // construtor
-    public Vendas(String data, String cliente, double valor, String tipoCarro) {
+    public Vendas(String data, String cliente, String valor, String tipoCarro) {
         this.data = data;
         this.cliente = cliente;
         this.valor = valor;
@@ -33,11 +33,11 @@ public class Vendas {
         this.cliente = cliente;
     }
 
-    public double getValor() {
+    public String getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(String valor) {
         this.valor = valor;
     }
 
