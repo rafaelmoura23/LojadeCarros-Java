@@ -146,20 +146,37 @@ public class VendasPainel extends JPanel {
 
         VendasControl operacoes = new VendasControl(vendas, tableModel, table);
 
-
-        atualizarButton.addActionListener(new ActionListener() {
+        cadastrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                String data = inputData.getText(); // Obtém a data do JTextField
+                String valor = inputValor.getText(); // Obtém o valor do JTextField
+                String clienteSelecionado = (String) clientesComboBox.getSelectedItem(); // Obtém o cliente selecionado no JComboBox
+                String carroSelecionado = (String) carrosComboBox.getSelectedItem(); // Obtém o carro selecionado no JComboBox
+        
+                if (data.isEmpty() || valor.isEmpty() || clienteSelecionado.equals("Selecione um cliente") || carroSelecionado.equals("Selecione um Carro")) {
+                    JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
+                } else {
+                    // Aqui você pode separar o cliente e o carro selecionados para obter apenas os valores relevantes
+                    String cliente = clienteSelecionado.split(" ")[0]; // Obtém o nome do cliente
+                    String carro = carroSelecionado.split(" ")[0]; // Obtém a marca e modelo do carro
+        
+                    // Chama o método "cadastrar" do objeto operacoes com os valores obtidos
+                    operacoes.cadastrar(data, cliente, valor, carro);
+                    // Limpa os campos de entrada após a operação de cadastro
+                    inputData.setText("");
+                    inputValor.setText("");
+                    clientesComboBox.setSelectedIndex(0); // Volta a seleção para o item padrão
+                    carrosComboBox.setSelectedIndex(0); // Volta a seleção para o item padrão
+        
+                    JOptionPane.showMessageDialog(null, "Venda cadastrada com sucesso!");
+                }
             }
         });
+        
 
 
 
 
-    }
-
-    public void run(){
-        setVisible(true);
     }
 }

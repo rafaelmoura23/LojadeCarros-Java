@@ -70,7 +70,7 @@ public class VendasDAO {
     public void cadastrar(String data, String cliente, String valor, String carro) {
         PreparedStatement stmt = null;
         // Define a instrução SQL parametrizada para cadastrar na tabela
-        String sql = "INSERT INTO clientes_lojacarros (data, cliente, valor, carro) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO vendas_lojacarros (data, cliente, valor, carro) VALUES (?, ?, ?, ?)";
         try {
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, data);
