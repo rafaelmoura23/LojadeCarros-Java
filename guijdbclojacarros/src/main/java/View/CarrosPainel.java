@@ -118,18 +118,15 @@ public class CarrosPainel extends JPanel {
                     // entrada
                     operacoes.cadastrar(carMarcaField.getText(), carModeloField.getText(), carAnoField.getText(),
                             carPlacaField.getText(), carValorField.getText());
-
-                    JOptionPane.showMessageDialog(null, "Você Cadastrou o carro " + carModeloField.getText() + " de placa "
-                            + carPlacaField.getText());
-
                     // Limpa os campos de entrada após a operação de cadastro
                     carMarcaField.setText("");
                     carModeloField.setText("");
                     carAnoField.setText("");
                     carPlacaField.setText("");
                     carValorField.setText("");
+                     JOptionPane.showMessageDialog(null, "Você Cadastrou o carro " + carModeloField.getText() + " de placa "
+                            + carPlacaField.getText());
                 }
-
             }
         });
 

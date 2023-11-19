@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import Model.Clientes;
 import Connection.ConnectionFactory;
 
@@ -80,7 +82,11 @@ public class ClientesDAO {
             stmt.executeUpdate();
             System.out.println("Dados inseridos com sucesso");
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao inserir dados no banco de dados.", e);
+           if (e.getSQLState().equals("23505")) {
+            JOptionPane.showMessageDialog(null, "\"Erro: O CPF inserido já existe na tabela.\"");
+           } else {
+             throw new RuntimeException("Erro ao inserir dados no banco de dados.", e);
+           }
         } finally {
             ConnectionFactory.closeConnection(connection,stmt);
         }

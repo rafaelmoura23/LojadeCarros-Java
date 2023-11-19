@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import Connection.ConnectionFactory;
 import Model.Carros;
 
@@ -85,7 +87,11 @@ public class CarrosDAO {
             stmt.executeUpdate();
             System.out.println("Dados inseridos com sucesso");
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao inserir dados no banco de dados.", e);
+            if (e.getSQLState().equals("23505")) {
+                JOptionPane.showMessageDialog(null, "\"Erro: A placa inserida já existe na tabela.\"");
+            } else {
+                throw new RuntimeException("Erro ao inserir dados no banco de dados.", e);
+            }
         } finally {
             ConnectionFactory.closeConnection(connection,stmt);
         }
