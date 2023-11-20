@@ -25,11 +25,16 @@ import Controller.ClientesDAO;
 import Controller.VendasControl;
 import Controller.VendasDAO;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import java.awt.*;
 
 import Model.Carros;
 import Model.Vendas;
 import Model.Clientes;
+
 
 public class VendasPainel extends JPanel {
     // atributos - componentes
@@ -160,22 +165,34 @@ public class VendasPainel extends JPanel {
                         || carroSelecionado.equals("Selecione um Carro")) {
                     JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
                 } else {
-                    String cliente = clienteSelecionado.split(" ")[0]; // pegar apenas o nome do cliente, retirando o
-                                                                       // CPF
-
-                    // Chama o método "cadastrar" do objeto operacoes com os valores obtidos
-                    operacoes.cadastrar(data, cliente, valor, carroSelecionado);
-                    // Limpa os campos de entrada após o cadastro
-                    inputData.setText("");
-                    inputValor.setText("");
-                    clientesComboBox.setSelectedIndex(0);
-                    carrosComboBox.setSelectedIndex(0);
-                    new CarrosDAO().apagar(carroSelecionado);
-                    JOptionPane.showMessageDialog(null, "Venda cadastrada com sucesso!");
+                    if (!valor.matches("[0-9]+")) {
+                        JOptionPane.showMessageDialog(null, "O campo 'Valor' deve conter apenas números.");
+                    } else {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    dateFormat.setLenient(false);
+                    
+                    try {
+                        // Tentar fazer o parse da data para verificar se é uma data válida
+                        Date parsedDate = dateFormat.parse(data);
+                        if (!data.equals(dateFormat.format(parsedDate))) {
+                            throw new ParseException("Formato inválido", 0);
+                        }
+        
+                        String cliente = clienteSelecionado.split(" ")[0];
+                        operacoes.cadastrar(data, cliente, valor, carroSelecionado);
+                        inputData.setText("");
+                        inputValor.setText("");
+                        clientesComboBox.setSelectedIndex(0);
+                        carrosComboBox.setSelectedIndex(0);
+                        new CarrosDAO().apagar(carroSelecionado);
+                        JOptionPane.showMessageDialog(null, "Venda cadastrada com sucesso!");
+                    } catch (ParseException ex) {
+                        JOptionPane.showMessageDialog(null, "Formato de data inválido. Utilize o formato dd/MM/yyyy.");
+                    }
                 }
             }
+            }
         });
-
         editarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
