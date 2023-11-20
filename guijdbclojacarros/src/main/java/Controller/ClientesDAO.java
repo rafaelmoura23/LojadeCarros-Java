@@ -81,6 +81,7 @@ public class ClientesDAO {
             stmt.setString(4, cidade);
             stmt.executeUpdate();
             System.out.println("Dados inseridos com sucesso");
+            JOptionPane.showMessageDialog(null, "Cliente cadastrado com Sucesso✅");
         } catch (SQLException e) {
            if (e.getSQLState().equals("23505")) {
             JOptionPane.showMessageDialog(null, "\"Erro: O CPF inserido já existe na tabela.\"");

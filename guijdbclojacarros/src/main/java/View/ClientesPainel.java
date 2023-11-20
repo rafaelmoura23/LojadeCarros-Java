@@ -159,8 +159,6 @@ public class ClientesPainel extends JPanel {
                     operacoes.cadastrar(inputCpf.getText(), inputNome.getText(), inputTelefone.getText(),
                             inputCidade.getText());
 
-                    JOptionPane.showMessageDialog(null, "Você Cadastrou o cliente " + inputNome.getText() +  " com sucesso!");
-
                     // Limpa os campos de entrada após a operação de cadastro
                     inputCpf.setText("");
                     inputNome.setText("");
@@ -199,6 +197,8 @@ public class ClientesPainel extends JPanel {
                 if (inputCpf.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Selecione um cliente para apagar.");
                 } else {
+                    int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja apagar os campos?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                    if (resposta == JOptionPane.YES_OPTION) {
                     // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada "placa"
                     operacoes.apagar(inputCpf.getText());
                     JOptionPane.showMessageDialog(null, "O Cliente " +inputNome.getText() + " de CPF " + inputCpf.getText() + " foi deletado!");
@@ -207,8 +207,11 @@ public class ClientesPainel extends JPanel {
                     inputNome.setText("");
                     inputTelefone.setText("");
                     inputCidade.setText("");
+                } else{
+                    JOptionPane.showMessageDialog(null, "O cliente não foi deletado!");
                 }
             }
+        }
         });
     }
 

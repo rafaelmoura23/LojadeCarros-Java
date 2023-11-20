@@ -124,8 +124,6 @@ public class CarrosPainel extends JPanel {
                     carAnoField.setText("");
                     carPlacaField.setText("");
                     carValorField.setText("");
-                     JOptionPane.showMessageDialog(null, "Você Cadastrou o carro " + carModeloField.getText() + " de placa "
-                            + carPlacaField.getText());
                 }
             }
         });
@@ -160,6 +158,8 @@ public class CarrosPainel extends JPanel {
                 if (carPlacaField.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Selecione um carro para apagar.");
                 } else {
+                    int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja apagar os campos?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                    if (resposta == JOptionPane.YES_OPTION) {
                     // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada
                     // "placa"
                     operacoes.apagar(carPlacaField.getText());
@@ -172,8 +172,11 @@ public class CarrosPainel extends JPanel {
                     carAnoField.setText("");
                     carPlacaField.setText("");
                     carValorField.setText("");
+                } else{
+                    JOptionPane.showMessageDialog(null, "O carro não foi deletado!");
                 }
             }
+        }
         });
 
     }

@@ -86,6 +86,7 @@ public class CarrosDAO {
             stmt.setString(5, valor);
             stmt.executeUpdate();
             System.out.println("Dados inseridos com sucesso");
+            JOptionPane.showMessageDialog(null, "Você Cadastrou o carro com sucesso✅");
         } catch (SQLException e) {
             if (e.getSQLState().equals("23505")) {
                 JOptionPane.showMessageDialog(null, "\"Erro: A placa inserida já existe na tabela.\"");
