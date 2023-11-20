@@ -120,14 +120,12 @@ public class ClientesPainel extends JPanel {
         painel1.add(inputPanel, BorderLayout.NORTH);
         painel1.add(buttons, BorderLayout.SOUTH);
 
-        
         // Criar o banco de dados
         new ClientesDAO().criaTabela();
 
         // incluir os elementos do banco na criação do painel
         atualizarTabela();
 
-        
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
@@ -141,43 +139,45 @@ public class ClientesPainel extends JPanel {
             }
         });
 
-
-
-
         ClientesControl operacoes = new ClientesControl(clientes, tableModel, table);
-
-
 
         cadastrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (inputCpf.getText().isEmpty() || inputNome.getText().isEmpty() || inputTelefone.getText().isEmpty() || inputCidade.getText().isEmpty()) {
+                if (inputCpf.getText().isEmpty() || inputNome.getText().isEmpty() || inputTelefone.getText().isEmpty()
+                        || inputCidade.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "ATENÇÃO! \nExistem campos em branco");
                 } else {
-                    // Chama o método "cadastrar" do objeto operacoes com os valores dos campos de
-                    // entrada
-                    operacoes.cadastrar(inputCpf.getText(), inputNome.getText(), inputTelefone.getText(),
-                            inputCidade.getText());
+                    if (!validarFormatoCPF(inputCpf.getText())) {
+                        JOptionPane.showMessageDialog(null,
+                                "CPF inválido! O CPF deve conter apenas números e ter 11 dígitos.");
+                    } else {
+                        // Chama o método "cadastrar" do objeto operacoes com os valores dos campos de
+                        // entrada
+                        operacoes.cadastrar(inputCpf.getText(), inputNome.getText(), inputTelefone.getText(),
+                                inputCidade.getText());
 
-                    // Limpa os campos de entrada após a operação de cadastro
-                    inputCpf.setText("");
-                    inputNome.setText("");
-                    inputTelefone.setText("");
-                    inputCidade.setText("");
+                        // Limpa os campos de entrada após a operação de cadastro
+                        inputCpf.setText("");
+                        inputNome.setText("");
+                        inputTelefone.setText("");
+                        inputCidade.setText("");
+                    }
                 }
 
             }
         });
 
+        
 
         editarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (inputCpf.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Selecione algo para editar");
-                } else{
+                } else {
                     operacoes.atualizar(labelCpf.getText(), labelNome.getText(),
-                                        labelTelefone.getText(), labelCidade.getText());
+                            labelTelefone.getText(), labelCidade.getText());
 
                     // Limpa os campos de entrada após a operação de atualização
                     inputCpf.setText("");
@@ -186,10 +186,9 @@ public class ClientesPainel extends JPanel {
                     inputCidade.setText("");
                     JOptionPane.showMessageDialog(null, "Informação editada com Sucesso!");
                 }
-                
+
             }
         });
-
 
         apagarButton.addActionListener(new ActionListener() {
             @Override
@@ -197,21 +196,24 @@ public class ClientesPainel extends JPanel {
                 if (inputCpf.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Selecione um cliente para apagar.");
                 } else {
-                    int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja apagar os campos?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                    int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja apagar os campos?",
+                            "Confirmação", JOptionPane.YES_NO_OPTION);
                     if (resposta == JOptionPane.YES_OPTION) {
-                    // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada "placa"
-                    operacoes.apagar(inputCpf.getText());
-                    JOptionPane.showMessageDialog(null, "O Cliente " +inputNome.getText() + " de CPF " + inputCpf.getText() + " foi deletado!");
-                    // Limpa os campos de entrada após a operação de exclusão
-                    inputCpf.setText("");
-                    inputNome.setText("");
-                    inputTelefone.setText("");
-                    inputCidade.setText("");
-                } else{
-                    JOptionPane.showMessageDialog(null, "O cliente não foi deletado!");
+                        // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada
+                        // "placa"
+                        operacoes.apagar(inputCpf.getText());
+                        JOptionPane.showMessageDialog(null, "O Cliente " + inputNome.getText() + " de CPF "
+                                + inputCpf.getText() + " foi deletado!");
+                        // Limpa os campos de entrada após a operação de exclusão
+                        inputCpf.setText("");
+                        inputNome.setText("");
+                        inputTelefone.setText("");
+                        inputCidade.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "O cliente não foi deletado!");
+                    }
                 }
             }
-        }
         });
     }
 
@@ -221,7 +223,16 @@ public class ClientesPainel extends JPanel {
         tableModel.setRowCount(0);
         clientes = new ClientesDAO().listarTodos();
         for (Clientes cliente : clientes) {
-            tableModel.addRow(new Object[] { cliente.getCpf(), cliente.getNome(), cliente.getTelefone(), cliente.getCidade()});
+            tableModel.addRow(
+                    new Object[] { cliente.getCpf(), cliente.getNome(), cliente.getTelefone(), cliente.getCidade() });
         }
+    }
+
+    private boolean validarFormatoCPF(String cpf) {
+        // Remove caracteres não numéricos do CPF
+        cpf = cpf.replaceAll("[^0-9]", "");
+
+        // Verifica se o CPF possui 11 dígitos (considerando os caracteres separadores)
+        return cpf.length() == 11;
     }
 }

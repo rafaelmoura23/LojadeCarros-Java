@@ -114,7 +114,12 @@ public class CarrosPainel extends JPanel {
                         || carPlacaField.getText().isEmpty() || carValorField.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "ATENÇÃO! \nExistem campos em branco");
                 } else {
-                    // Chama o método "cadastrar" do objeto operacoes com os valores dos campos de
+                    if (!carAnoField.getText().matches("[0-9]+")) {
+                        JOptionPane.showMessageDialog(null, "O campo 'Ano' deve conter apenas números.");
+                    } else if(!carValorField.getText().matches("[0-9]+")){
+                        JOptionPane.showMessageDialog(null, "O campo 'Valor' deve conter apenas números.");
+                    } else{
+                        // Chama o método "cadastrar" do objeto operacoes com os valores dos campos de
                     // entrada
                     operacoes.cadastrar(carMarcaField.getText(), carModeloField.getText(), carAnoField.getText(),
                             carPlacaField.getText(), carValorField.getText());
@@ -124,6 +129,8 @@ public class CarrosPainel extends JPanel {
                     carAnoField.setText("");
                     carPlacaField.setText("");
                     carValorField.setText("");
+                    }
+                    
                 }
             }
         });
