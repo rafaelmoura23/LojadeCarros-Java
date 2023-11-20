@@ -202,7 +202,6 @@ public class ClientesPainel extends JPanel {
                     // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada "placa"
                     operacoes.apagar(inputCpf.getText());
                     JOptionPane.showMessageDialog(null, "O Cliente " +inputNome.getText() + " de CPF " + inputCpf.getText() + " foi deletado!");
-
                     // Limpa os campos de entrada após a operação de exclusão
                     inputCpf.setText("");
                     inputNome.setText("");

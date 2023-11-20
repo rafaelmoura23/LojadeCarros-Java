@@ -129,7 +129,7 @@ public class VendasPainel extends JPanel {
         new VendasDAO().criaTabela();
 
         // incluir os elementos do banco na criação do painel
-        // atualizarTabela();
+        atualizarTabela();
 
         table.addMouseListener(new MouseAdapter() {
             @Override
@@ -149,34 +149,90 @@ public class VendasPainel extends JPanel {
         cadastrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String data = inputData.getText(); // Obtém a data do JTextField
-                String valor = inputValor.getText(); // Obtém o valor do JTextField
-                String clienteSelecionado = (String) clientesComboBox.getSelectedItem(); // Obtém o cliente selecionado no JComboBox
-                String carroSelecionado = (String) carrosComboBox.getSelectedItem(); // Obtém o carro selecionado no JComboBox
-        
-                if (data.isEmpty() || valor.isEmpty() || clienteSelecionado.equals("Selecione um cliente") || carroSelecionado.equals("Selecione um Carro")) {
+                String data = inputData.getText();
+                String valor = inputValor.getText();
+                String clienteSelecionado = (String) clientesComboBox.getSelectedItem(); // pegar o cliente selecionado
+                                                                                         // no ComboBox
+                String carroSelecionado = (String) carrosComboBox.getSelectedItem(); // pegar o carro selecionado no
+                                                                                     // ComboBox
+
+                if (data.isEmpty() || valor.isEmpty() || clienteSelecionado.equals("Selecione um cliente")
+                        || carroSelecionado.equals("Selecione um Carro")) {
                     JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
                 } else {
-                    // Aqui você pode separar o cliente e o carro selecionados para obter apenas os valores relevantes
-                    String cliente = clienteSelecionado.split(" ")[0]; // Obtém o nome do cliente
-                    String carro = carroSelecionado.split(" ")[0]; // Obtém a marca e modelo do carro
-        
+                    String cliente = clienteSelecionado.split(" ")[0]; // pegar apenas o nome do cliente, retirando o
+                                                                       // CPF
+
                     // Chama o método "cadastrar" do objeto operacoes com os valores obtidos
-                    operacoes.cadastrar(data, cliente, valor, carro);
-                    // Limpa os campos de entrada após a operação de cadastro
+                    operacoes.cadastrar(data, cliente, valor, carroSelecionado);
+                    // Limpa os campos de entrada após o cadastro
                     inputData.setText("");
                     inputValor.setText("");
-                    clientesComboBox.setSelectedIndex(0); // Volta a seleção para o item padrão
-                    carrosComboBox.setSelectedIndex(0); // Volta a seleção para o item padrão
-        
+                    clientesComboBox.setSelectedIndex(0);
+                    carrosComboBox.setSelectedIndex(0);
+                    new CarrosDAO().apagar(carroSelecionado);
                     JOptionPane.showMessageDialog(null, "Venda cadastrada com sucesso!");
                 }
             }
         });
-        
 
+        editarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String clienteSelecionado = (String) clientesComboBox.getSelectedItem(); // pegar o cliente selecionad no ComboBox
+                String carroSelecionado = (String) carrosComboBox.getSelectedItem(); // pegar o carro selecionado no ComboBox
+                if (inputCarro.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Selecione algo para editar");
+                } else {
+                    operacoes.atualizar(inputData.getText(), clienteSelecionado, inputValor.getText(),
+                            carroSelecionado);
 
+                    // Limpa os campos de entrada após a operação de atualização
+                    inputData.setText("");
+                    inputValor.setText("");
+                    clientesComboBox.setSelectedIndex(0);
+                    carrosComboBox.setSelectedIndex(0);
+                    JOptionPane.showMessageDialog(null, "Informação editada com Sucesso!");
+                }
 
+            }
+        });
+
+        // Configura a ação do botão "apagar" para excluir um registro no banco de dados
+        apagarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String carroSelecionado = (String) carrosComboBox.getSelectedItem(); // pegar o carro selecionado no ComboBox
+                if (inputCarro.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Selecione um registro para apagar.");
+                } else {
+                    // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada
+                    // "placa"
+                    operacoes.apagar(inputCarro.getText());
+                    JOptionPane.showMessageDialog(null, "A venda foi deletada!");
+
+                    // Limpa os campos de entrada após a operação de exclusão
+                    inputData.setText("");
+                    inputValor.setText("");
+                    clientesComboBox.setSelectedIndex(0);
+                    carrosComboBox.setSelectedIndex(0);
+
+                }
+            }
+        });
+
+    }
+
+     // atualizar Tabela de Carros com o Banco de Dados
+     private void atualizarTabela() {
+            String clienteSelecionado = (String) clientesComboBox.getSelectedItem(); // pegar o cliente selecionad no ComboBox
+            String carroSelecionado = (String) carrosComboBox.getSelectedItem(); // pegar o carro selecionado no ComboBox
+        // atualizar tabela pelo banco de dados
+        tableModel.setRowCount(0);
+        vendas = new VendasDAO().listarTodos();
+        for (Vendas venda : vendas) {
+            tableModel.addRow(new Object[] { venda.getCliente(), venda.getData(), venda.getTipoCarro(), venda.getValor()});
+        }
 
     }
 }
