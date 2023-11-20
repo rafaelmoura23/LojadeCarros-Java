@@ -70,13 +70,13 @@ public class VendasDAO {
     public void cadastrar(String data, String cliente, String valor, String carro) {
         PreparedStatement stmt = null;
         // Define a instrução SQL parametrizada para cadastrar na tabela
-        String sql = "INSERT INTO vendas_lojacarros (data, cliente, valor, carro) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO vendas_lojacarros (cliente, data, carro, valor) VALUES (?, ?, ?, ?)";
         try {
             stmt = connection.prepareStatement(sql);
-            stmt.setString(1, data);
-            stmt.setString(2, cliente);
-            stmt.setString(3, valor);
-            stmt.setString(4, carro);
+            stmt.setString(1, cliente);
+            stmt.setString(2, data);
+            stmt.setString(3, carro);
+            stmt.setString(4, valor);
             stmt.executeUpdate();
             System.out.println("Dados inseridos com sucesso");
         } catch (SQLException e) {

@@ -164,7 +164,7 @@ public class VendasPainel extends JPanel {
                                                                        // CPF
 
                     // Chama o método "cadastrar" do objeto operacoes com os valores obtidos
-                    operacoes.cadastrar(cliente, data, carroSelecionado, valor);
+                    operacoes.cadastrar(data, cliente, valor, carroSelecionado);
                     // Limpa os campos de entrada após o cadastro
                     inputData.setText("");
                     inputValor.setText("");
