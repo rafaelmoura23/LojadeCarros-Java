@@ -242,12 +242,19 @@ public class VendasPainel extends JPanel {
             }
         });
 
+        // atualizar as comboBox com os valores atuais
+        atualizarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                atualizarComboBoxClientes();
+                atualizarComboBoxCarros();
+            }
+        });
+
     }
 
      // atualizar Tabela de Carros com o Banco de Dados
      private void atualizarTabela() {
-            String clienteSelecionado = (String) clientesComboBox.getSelectedItem(); // pegar o cliente selecionad no ComboBox
-            String carroSelecionado = (String) carrosComboBox.getSelectedItem(); // pegar o carro selecionado no ComboBox
         // atualizar tabela pelo banco de dados
         tableModel.setRowCount(0);
         vendas = new VendasDAO().listarTodos();
@@ -255,5 +262,25 @@ public class VendasPainel extends JPanel {
             tableModel.addRow(new Object[] { venda.getCliente(), venda.getData(), venda.getTipoCarro(), venda.getValor()});
         }
 
+    }
+
+    // Método para atualizar ComboBox de Clientes
+    private void atualizarComboBoxClientes() {
+        clientesComboBox.removeAllItems();
+        clientesComboBox.addItem("Selecione um cliente");
+        clientes = new ClientesDAO().listarTodos();
+        for (Clientes cliente : clientes) {
+            clientesComboBox.addItem(cliente.getNome() + " " + cliente.getCpf());
+        }
+    }
+
+    // Método para atualizar ComboBox de Carros
+    private void atualizarComboBoxCarros() {
+        carrosComboBox.removeAllItems();
+        carrosComboBox.addItem("Selecione um Carro");
+        carros = new CarrosDAO().listarTodos();
+        for (Carros carro : carros) {
+            carrosComboBox.addItem(carro.getMarca() + " " + carro.getModelo());
+        }
     }
 }
