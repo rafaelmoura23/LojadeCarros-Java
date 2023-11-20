@@ -164,7 +164,7 @@ public class VendasPainel extends JPanel {
                                                                        // CPF
 
                     // Chama o método "cadastrar" do objeto operacoes com os valores obtidos
-                    operacoes.cadastrar(data, cliente, valor, carroSelecionado);
+                    operacoes.cadastrar(cliente, data, carroSelecionado, valor);
                     // Limpa os campos de entrada após o cadastro
                     inputData.setText("");
                     inputValor.setText("");
@@ -206,6 +206,8 @@ public class VendasPainel extends JPanel {
                 if (inputCarro.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Selecione um registro para apagar.");
                 } else {
+                    int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja apagar os campos?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                    if (resposta == JOptionPane.YES_OPTION) {
                     // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada
                     // "placa"
                     operacoes.apagar(inputCarro.getText());
@@ -216,8 +218,10 @@ public class VendasPainel extends JPanel {
                     inputValor.setText("");
                     clientesComboBox.setSelectedIndex(0);
                     carrosComboBox.setSelectedIndex(0);
-
+                } else{
+                    JOptionPane.showMessageDialog(null,"A venda não foi deletada");
                 }
+            }
             }
         });
 
