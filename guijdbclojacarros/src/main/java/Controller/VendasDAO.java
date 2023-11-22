@@ -39,7 +39,7 @@ public class VendasDAO {
     public List<Vendas> listarTodos() {
         PreparedStatement stmt = null; // Declaração do objeto PreparedStatement para executar a consulta
         ResultSet rs = null; // Declaração do objeto ResultSet para armazenar os resultados da consulta
-        vendas = new ArrayList<>(); // Cria uma lista para armazenar os carros recuperados do banco de dados
+        vendas = new ArrayList<>(); // Cria uma lista para armazenar as Vendas recuperados do banco de dados
     
         try {
             stmt = connection.prepareStatement("SELECT * FROM vendas_lojacarros"); 
@@ -48,24 +48,24 @@ public class VendasDAO {
             // Executa a consulta e armazena os resultados no ResultSet
     
             while (rs.next()) {
-                // Para cada registro no ResultSet, cria um objeto Carros com os valores do registro
+                // Para cada registro no ResultSet, cria um objeto Vendas com os valores do registro
                 Vendas venda = new Vendas(
                     rs.getString("data"),
                     rs.getString("cliente"),
                     rs.getString("valor"),
                     rs.getString("carro")
                 );
-                vendas.add(venda); // Adiciona o objeto Carros à lista de carros
+                vendas.add(venda);
             }
         } catch (SQLException ex) {
             System.out.println(ex); // Em caso de erro durante a consulta, imprime o erro
         } finally {
             ConnectionFactory.closeConnection(connection, stmt, rs); // Fecha a conexão, o PreparedStatement e o ResultSet
         }
-        return vendas; // Retorna a lista de carros recuperados do banco de dados
+        return vendas; // Retorna a lista de vendas
     }
 
-    //Cadastrar Carro no banco
+    //Cadastrar Vendas no banco
     public void cadastrar(String data, String cliente, String valor, String carro) {
         PreparedStatement stmt = null;
         // Define a instrução SQL parametrizada para cadastrar na tabela

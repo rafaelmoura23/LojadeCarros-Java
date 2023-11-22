@@ -42,7 +42,7 @@ public class ClientesDAO {
     public List<Clientes> listarTodos() {
         PreparedStatement stmt = null; // Declaração do objeto PreparedStatement para executar a consulta
         ResultSet rs = null; // Declaração do objeto ResultSet para armazenar os resultados da consulta
-        clientes = new ArrayList<>(); // Cria uma lista para armazenar os carros recuperados do banco de dados
+        clientes = new ArrayList<>(); // Cria uma lista para armazenar os clientes recuperados do banco de dados
     
         try {
             stmt = connection.prepareStatement("SELECT * FROM clientes_lojacarros"); 
@@ -51,24 +51,24 @@ public class ClientesDAO {
             // Executa a consulta e armazena os resultados no ResultSet
     
             while (rs.next()) {
-                // Para cada registro no ResultSet, cria um objeto Carros com os valores do registro
+                // Para cada registro no ResultSet, cria um objeto Clientes com os valores das rows
                 Clientes cliente = new Clientes(
                     rs.getString("cpf"),
                     rs.getString("nome"),
                     rs.getString("telefone"),
                     rs.getString("cidade")
                 );
-                clientes.add(cliente); // Adiciona o objeto Carros à lista de carros
+                clientes.add(cliente);
             }
         } catch (SQLException ex) {
             System.out.println(ex); // Em caso de erro durante a consulta, imprime o erro
         } finally {
             ConnectionFactory.closeConnection(connection, stmt, rs); // Fecha a conexão, o PreparedStatement e o ResultSet
         }
-        return clientes; // Retorna a lista de carros recuperados do banco de dados
+        return clientes; // Retorna a lista de clientes
     }
 
-    //Cadastrar Carro no banco
+    // Cadastrar Cliente no banco
     public void cadastrar(String cpf, String nome, String telefone, String cidade) {
         PreparedStatement stmt = null;
         // Define a instrução SQL parametrizada para cadastrar na tabela
