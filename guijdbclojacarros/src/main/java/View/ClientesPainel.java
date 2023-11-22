@@ -143,28 +143,27 @@ public class ClientesPainel extends JPanel {
         cadastrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (inputCpf.getText().isEmpty() || inputNome.getText().isEmpty() || inputTelefone.getText().isEmpty()
-                        || inputCidade.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "ATENÇÃO! \nExistem campos em branco");
+                // validação para verificar se existem campos sem ser preenchidos
+                if (inputCpf.getText().isEmpty() || inputNome.getText().isEmpty() || inputTelefone.getText().isEmpty() || inputCidade.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Existem campos em branco");
                 } else {
+                    // verificação para o campo de input do cpf, chama o método validarCPF
                     if (!validarFormatoCPF(inputCpf.getText())) {
                         JOptionPane.showMessageDialog(null,
                         "CPF inválido! O CPF deve conter apenas números e ter 11 dígitos.");
                     } else if (!inputTelefone.getText().matches("[0-9]+") || inputTelefone.getText().length() < 11 ) {
+                        // validação para verificar se o input do telefone contém apenas núemeros e 
                         JOptionPane.showMessageDialog(null, "O campo 'Telefone' deve conter apenas números.");
                         JOptionPane.showMessageDialog(null, "Adicione  no seguinte formato 19999999999.");
                     } else if (!inputNome.getText().matches("[a-zA-ZÀ-ú\\s]+")) {
+                        //validação para o campo nome
                         JOptionPane.showMessageDialog(null, "O campo 'Nome' deve conter apenas letras.");
                     } else if (!inputCidade.getText().matches("[a-zA-ZÀ-ú\\s]+")) {
+                        //validação para o campo cidade conter apenas letras
                         JOptionPane.showMessageDialog(null, "O campo 'Cidade' deve conter apenas letras.");
-                    }
-
-                    else {
-                        // Chama o método "cadastrar" do objeto operacoes com os valores dos campos de
-                        // entrada
-                        operacoes.cadastrar(inputCpf.getText(), inputNome.getText(), inputTelefone.getText(),
-                                inputCidade.getText());
-
+                    } else {
+                        // Chama o método "cadastrar" do objeto operacoes com os valores dos campos de entrada
+                        operacoes.cadastrar(inputCpf.getText(), inputNome.getText(), inputTelefone.getText(),inputCidade.getText());
                         // Limpa os campos de entrada após a operação de cadastro
                         inputCpf.setText("");
                         inputNome.setText("");
@@ -176,15 +175,15 @@ public class ClientesPainel extends JPanel {
             }
         });
 
+        // evento para o botão editar
         editarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (inputCpf.getText().isEmpty()) {
+                    // se não estiver nada selecionado
                     JOptionPane.showMessageDialog(null, "Selecione algo para editar");
                 } else {
-                    operacoes.atualizar(labelCpf.getText(), labelNome.getText(),
-                            labelTelefone.getText(), labelCidade.getText());
-
+                    operacoes.atualizar(labelCpf.getText(), labelNome.getText(), labelTelefone.getText(), labelCidade.getText());
                     // Limpa os campos de entrada após a operação de atualização
                     inputCpf.setText("");
                     inputNome.setText("");
@@ -192,24 +191,24 @@ public class ClientesPainel extends JPanel {
                     inputCidade.setText("");
                     JOptionPane.showMessageDialog(null, "Informação editada com Sucesso!");
                 }
-
             }
         });
 
+        // evento para o botão apagar
         apagarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (inputCpf.getText().isEmpty()) {
+                    // se não tiver nenhuma linha selecionada
                     JOptionPane.showMessageDialog(null, "Selecione um cliente para apagar.");
                 } else {
+                    // lógica com JOptionPane para validar que o usuario quer excluir o cliente
                     int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja apagar?",
                             "Confirmação", JOptionPane.YES_NO_OPTION);
                     if (resposta == JOptionPane.YES_OPTION) {
-                        // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada
-                        // "placa"
+                        // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada "placa"
                         operacoes.apagar(inputCpf.getText());
-                        JOptionPane.showMessageDialog(null, "O Cliente " + inputNome.getText() + " de CPF "
-                                + inputCpf.getText() + " foi deletado!");
+                        JOptionPane.showMessageDialog(null, "O Cliente " + inputNome.getText() + " de CPF " + inputCpf.getText() + " foi deletado!");
                         // Limpa os campos de entrada após a operação de exclusão
                         inputCpf.setText("");
                         inputNome.setText("");
