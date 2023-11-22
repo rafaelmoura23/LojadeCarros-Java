@@ -202,7 +202,7 @@ public class ClientesPainel extends JPanel {
                 if (inputCpf.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Selecione um cliente para apagar.");
                 } else {
-                    int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja apagar os campos?",
+                    int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja apagar?",
                             "Confirmação", JOptionPane.YES_NO_OPTION);
                     if (resposta == JOptionPane.YES_OPTION) {
                         // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada

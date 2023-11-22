@@ -35,7 +35,6 @@ import Model.Carros;
 import Model.Vendas;
 import Model.Clientes;
 
-
 public class VendasPainel extends JPanel {
     // atributos - componentes
     // campo de texto - JTextField
@@ -60,6 +59,8 @@ public class VendasPainel extends JPanel {
 
     JComboBox<String> carrosComboBox;
     JComboBox<String> clientesComboBox;
+    JComboBox<String> placasComboBox;
+
 
     public VendasPainel() {
         JPanel painel1 = new JPanel(new BorderLayout());
@@ -68,6 +69,7 @@ public class VendasPainel extends JPanel {
 
         carrosComboBox = new JComboBox<>();
         clientesComboBox = new JComboBox<>();
+        placasComboBox = new JComboBox<>();
 
         // construir a tabela
         tableModel = new DefaultTableModel();
@@ -113,6 +115,7 @@ public class VendasPainel extends JPanel {
         painel1.add(inputPanel, BorderLayout.NORTH);
         painel1.add(buttons, BorderLayout.SOUTH);
 
+
         carrosComboBox.addItem("Selecione um Carro");
         carros = new CarrosDAO().listarTodos();
         for (Carros carro : carros) {
@@ -126,7 +129,14 @@ public class VendasPainel extends JPanel {
             clientesComboBox.addItem(cliente.getNome() + " " + cliente.getCpf());
         }
 
-        // adicionando o JComboBox ao painel
+        carros = new CarrosDAO().listarTodos();
+        for (Carros carros1 : carros) {
+            placasComboBox.addItem(carros1.getPlaca());
+        }
+
+
+
+        // adicionando o JComboBox ao Jpainel
         inputPanel.add(clientesComboBox);
         inputPanel.add(carrosComboBox);
 
@@ -160,6 +170,8 @@ public class VendasPainel extends JPanel {
                                                                                          // no ComboBox
                 String carroSelecionado = (String) carrosComboBox.getSelectedItem(); // pegar o carro selecionado no
                                                                                      // ComboBox
+                String placaSelecionada = (String) placasComboBox.getSelectedItem();
+                                                            
 
                 if (data.isEmpty() || valor.isEmpty() || clienteSelecionado.equals("Selecione um cliente")
                         || carroSelecionado.equals("Selecione um Carro")) {
@@ -168,36 +180,40 @@ public class VendasPainel extends JPanel {
                     if (!valor.matches("[0-9]+")) {
                         JOptionPane.showMessageDialog(null, "O campo 'Valor' deve conter apenas números.");
                     } else {
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                    dateFormat.setLenient(false);
-                    
-                    try {
-                        // Tentar fazer o parse da data para verificar se é uma data válida
-                        Date parsedDate = dateFormat.parse(data);
-                        if (!data.equals(dateFormat.format(parsedDate))) {
-                            throw new ParseException("Formato inválido", 0);
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        dateFormat.setLenient(false);
+
+                        try {
+                            // Tentar fazer o parse da data para verificar se é uma data válida
+                            Date parsedDate = dateFormat.parse(data);
+                            if (!data.equals(dateFormat.format(parsedDate))) {
+                                throw new ParseException("Formato inválido", 0);
+                            }
+
+                            String cliente = clienteSelecionado.split(" ")[0];
+                            operacoes.cadastrar(data, cliente, valor, carroSelecionado);
+                            inputData.setText("");
+                            inputValor.setText("");
+                            clientesComboBox.setSelectedIndex(0);
+                            carrosComboBox.setSelectedIndex(0);
+                            JOptionPane.showMessageDialog(null, "Venda cadastrada com sucesso!");
+                            JOptionPane.showMessageDialog(null, "placa = " + placaSelecionada);
+
+                        } catch (ParseException ex) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Formato de data inválido. Utilize o formato dd/MM/yyyy.");
                         }
-        
-                        String cliente = clienteSelecionado.split(" ")[0];
-                        operacoes.cadastrar(data, cliente, valor, carroSelecionado);
-                        inputData.setText("");
-                        inputValor.setText("");
-                        clientesComboBox.setSelectedIndex(0);
-                        carrosComboBox.setSelectedIndex(0);
-                        new CarrosDAO().apagar(carroSelecionado);
-                        JOptionPane.showMessageDialog(null, "Venda cadastrada com sucesso!");
-                    } catch (ParseException ex) {
-                        JOptionPane.showMessageDialog(null, "Formato de data inválido. Utilize o formato dd/MM/yyyy.");
                     }
                 }
-            }
             }
         });
         editarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String clienteSelecionado = (String) clientesComboBox.getSelectedItem(); // pegar o cliente selecionad no ComboBox
-                String carroSelecionado = (String) carrosComboBox.getSelectedItem(); // pegar o carro selecionado no ComboBox
+                String clienteSelecionado = (String) clientesComboBox.getSelectedItem(); // pegar o cliente selecionad
+                                                                                         // no ComboBox
+                String carroSelecionado = (String) carrosComboBox.getSelectedItem(); // pegar o carro selecionado no
+                                                                                     // ComboBox
                 if (inputCarro.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Selecione algo para editar");
                 } else {
@@ -219,26 +235,26 @@ public class VendasPainel extends JPanel {
         apagarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String carroSelecionado = (String) carrosComboBox.getSelectedItem(); // pegar o carro selecionado no ComboBox
                 if (inputCarro.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Selecione um registro para apagar.");
                 } else {
-                    int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja apagar os campos?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                    int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja apagar os campos?",
+                            "Confirmação", JOptionPane.YES_NO_OPTION);
                     if (resposta == JOptionPane.YES_OPTION) {
-                    // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada
-                    // "placa"
-                    operacoes.apagar(inputCarro.getText());
-                    JOptionPane.showMessageDialog(null, "A venda foi deletada!");
+                        // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada
+                        // "placa"
+                        operacoes.apagar(inputCarro.getText());
+                        JOptionPane.showMessageDialog(null, "A venda foi deletada!");
 
-                    // Limpa os campos de entrada após a operação de exclusão
-                    inputData.setText("");
-                    inputValor.setText("");
-                    clientesComboBox.setSelectedIndex(0);
-                    carrosComboBox.setSelectedIndex(0);
-                } else{
-                    JOptionPane.showMessageDialog(null,"A venda não foi deletada");
+                        // Limpa os campos de entrada após a operação de exclusão
+                        inputData.setText("");
+                        inputValor.setText("");
+                        clientesComboBox.setSelectedIndex(0);
+                        carrosComboBox.setSelectedIndex(0);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "A venda não foi deletada");
+                    }
                 }
-            }
             }
         });
 
@@ -253,13 +269,14 @@ public class VendasPainel extends JPanel {
 
     }
 
-     // atualizar Tabela de Carros com o Banco de Dados
-     private void atualizarTabela() {
+    // atualizar Tabela de Carros com o Banco de Dados
+    private void atualizarTabela() {
         // atualizar tabela pelo banco de dados
         tableModel.setRowCount(0);
         vendas = new VendasDAO().listarTodos();
         for (Vendas venda : vendas) {
-            tableModel.addRow(new Object[] { venda.getCliente(), venda.getData(), venda.getTipoCarro(), venda.getValor()});
+            tableModel.addRow(
+                    new Object[] { venda.getCliente(), venda.getData(), venda.getTipoCarro(), venda.getValor() });
         }
 
     }
