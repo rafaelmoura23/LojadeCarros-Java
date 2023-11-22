@@ -127,12 +127,14 @@ public class VendasPainel extends JPanel {
         painel1.add(buttons, BorderLayout.SOUTH);
 
 
+        // comboBox guardando todos os carros
         carrosComboBox.addItem("Selecione um Carro");
         carros = new CarrosDAO().listarTodos();
         for (Carros carro : carros) {
             carrosComboBox.addItem(carro.getMarca() + " " + carro.getModelo());
         }
 
+        // comboBox guardando todos dos clientes
         clientesComboBox.addItem("Selecione um cliente");
         clientes = new ClientesDAO().listarTodos();
         // criar um método para atualizar o combobox
@@ -172,20 +174,19 @@ public class VendasPainel extends JPanel {
 
         VendasControl operacoes = new VendasControl(vendas, tableModel, table);
 
+        // evento para o botão cadastrar
         cadastrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String data = inputData.getText();
                 String valor = inputValor.getText();
-                String clienteSelecionado = (String) clientesComboBox.getSelectedItem(); // pegar o cliente selecionado
-                                                                                         // no ComboBox
-                String carroSelecionado = (String) carrosComboBox.getSelectedItem(); // pegar o carro selecionado no
-                                                                                     // ComboBox
+                String clienteSelecionado = (String) clientesComboBox.getSelectedItem(); // pegar o cliente selecionado no ComboBox
+                String carroSelecionado = (String) carrosComboBox.getSelectedItem(); // pegar o carro selecionado noComboBox
                 // String placaSelecionada = (String) placasComboBox.getSelectedItem();
                                                             
 
-                if (data.isEmpty() || valor.isEmpty() || clienteSelecionado.equals("Selecione um cliente")
-                        || carroSelecionado.equals("Selecione um Carro")) {
+                // lógica para os campos vazios, incluindo a combobox não selecionada
+                if (data.isEmpty() || valor.isEmpty() || clienteSelecionado.equals("Selecione um cliente") || carroSelecionado.equals("Selecione um Carro")) {
                     JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
                 } else {
                     if (!valor.matches("[0-9]+")) {
@@ -212,7 +213,7 @@ public class VendasPainel extends JPanel {
 
                         } catch (ParseException ex) {
                             JOptionPane.showMessageDialog(null,
-                                    "Formato de data inválido. Utilize o formato dd/MM/yyyy.");
+                                    "Formato de data inválido. Utilize o formato dd/mm/yyyy.");
                         }
                     }
                 }
@@ -230,11 +231,9 @@ public class VendasPainel extends JPanel {
                     int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja apagar os campos?",
                             "Confirmação", JOptionPane.YES_NO_OPTION);
                     if (resposta == JOptionPane.YES_OPTION) {
-                        // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada
-                        // "placa"
+                        // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada "placa"
                         operacoes.apagar(carroSelecionado);
                         JOptionPane.showMessageDialog(null, "A venda foi deletada!");
-        
                         // Limpa os campos de entrada após a operação de exclusão
                         inputData.setText("");
                         inputValor.setText("");
