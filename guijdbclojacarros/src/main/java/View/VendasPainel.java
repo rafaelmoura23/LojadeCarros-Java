@@ -55,7 +55,7 @@ public class VendasPainel extends JPanel {
     private List<Carros> carros;
     private List<Clientes> clientes;
     private int linhaSelecionada = -1;
-    private JButton cadastrarButton, apagarButton, editarButton, atualizarButton;
+    private JButton cadastrarButton, apagarButton, atualizarButton;
 
     JComboBox<String> carrosComboBox;
     JComboBox<String> clientesComboBox;
@@ -68,8 +68,12 @@ public class VendasPainel extends JPanel {
         JPanel buttons = new JPanel();
 
         carrosComboBox = new JComboBox<>();
+        carrosComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
+
         clientesComboBox = new JComboBox<>();
-        placasComboBox = new JComboBox<>();
+        clientesComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
+
+        // placasComboBox = new JComboBox<>();
 
         // construir a tabela
         tableModel = new DefaultTableModel();
@@ -82,21 +86,32 @@ public class VendasPainel extends JPanel {
         scrollPane.setViewportView(table);
 
         // criar os componentes
-        inputCliente = new JTextField(20);
+        // inputCliente = new JTextField(20);
+
         inputData = new JTextField(10);
+        inputData.setFont(new Font("Arial", Font.PLAIN, 16));
+
         inputCarro = new JTextField(20);
+
         inputValor = new JTextField(10);
+        inputValor.setFont(new Font("Arial", Font.PLAIN, 16));
 
         // criar os componentes - labels
         labelData = new JLabel("Data");
-        labelCarro = new JLabel("Carro");
+        labelData.setFont(new Font("Arial", Font.PLAIN, 16));
+
         labelValor = new JLabel("Valor");
+        labelValor.setFont(new Font("Arial", Font.PLAIN, 16));
 
         // botões
         cadastrarButton = new JButton("Comprar");
+        cadastrarButton.setFont(new Font("Arial", Font.PLAIN, 16));
+
         apagarButton = new JButton("Apagar");
-        editarButton = new JButton("Editar");
+        apagarButton.setFont(new Font("Arial", Font.PLAIN, 16));
+
         atualizarButton = new JButton("Atualizar");
+        atualizarButton.setFont(new Font("Arial", Font.PLAIN, 16));
 
         // adicionar os componentes
         inputPanel.add(labelData);
@@ -106,7 +121,6 @@ public class VendasPainel extends JPanel {
         inputPanel.add(inputValor);
 
         buttons.add(cadastrarButton);
-        buttons.add(editarButton);
         buttons.add(apagarButton);
         buttons.add(atualizarButton);
 
@@ -207,35 +221,13 @@ public class VendasPainel extends JPanel {
                 }
             }
         });
-        editarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String clienteSelecionado = (String) clientesComboBox.getSelectedItem(); // pegar o cliente selecionad
-                                                                                         // no ComboBox
-                String carroSelecionado = (String) carrosComboBox.getSelectedItem(); // pegar o carro selecionado no
-                                                                                     // ComboBox
-                if (inputCarro.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Selecione algo para editar");
-                } else {
-                    operacoes.atualizar(inputData.getText(), clienteSelecionado, inputValor.getText(),
-                            carroSelecionado);
-
-                    // Limpa os campos de entrada após a operação de atualização
-                    inputData.setText("");
-                    inputValor.setText("");
-                    clientesComboBox.setSelectedIndex(0);
-                    carrosComboBox.setSelectedIndex(0);
-                    JOptionPane.showMessageDialog(null, "Informação editada com Sucesso!");
-                }
-
-            }
-        });
 
         // Configura a ação do botão "apagar" para excluir um registro no banco de dados
         apagarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (inputCarro.getText().isEmpty()) {
+                String carroSelecionado = (String) carrosComboBox.getSelectedItem();
+                if (carroSelecionado == null || carroSelecionado.isEmpty() || carroSelecionado.equals("Selecione um Carro")) {
                     JOptionPane.showMessageDialog(null, "Selecione um registro para apagar.");
                 } else {
                     int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja apagar os campos?",
@@ -243,9 +235,9 @@ public class VendasPainel extends JPanel {
                     if (resposta == JOptionPane.YES_OPTION) {
                         // Chama o método "apagar" do objeto operacoes com o valor do campo de entrada
                         // "placa"
-                        operacoes.apagar(inputCarro.getText());
+                        operacoes.apagar(carroSelecionado);
                         JOptionPane.showMessageDialog(null, "A venda foi deletada!");
-
+        
                         // Limpa os campos de entrada após a operação de exclusão
                         inputData.setText("");
                         inputValor.setText("");
@@ -257,6 +249,7 @@ public class VendasPainel extends JPanel {
                 }
             }
         });
+        
 
         // atualizar as comboBox com os valores atuais
         atualizarButton.addActionListener(new ActionListener() {
