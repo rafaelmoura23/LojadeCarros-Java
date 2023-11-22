@@ -129,10 +129,10 @@ public class VendasPainel extends JPanel {
             clientesComboBox.addItem(cliente.getNome() + " " + cliente.getCpf());
         }
 
-        carros = new CarrosDAO().listarTodos();
-        for (Carros carros1 : carros) {
-            placasComboBox.addItem(carros1.getPlaca());
-        }
+        // carros = new CarrosDAO().listarTodos();
+        // for (Carros carros1 : carros) {
+        //     placasComboBox.addItem(carros1.getPlaca());
+        // }
 
 
 
@@ -170,7 +170,7 @@ public class VendasPainel extends JPanel {
                                                                                          // no ComboBox
                 String carroSelecionado = (String) carrosComboBox.getSelectedItem(); // pegar o carro selecionado no
                                                                                      // ComboBox
-                String placaSelecionada = (String) placasComboBox.getSelectedItem();
+                // String placaSelecionada = (String) placasComboBox.getSelectedItem();
                                                             
 
                 if (data.isEmpty() || valor.isEmpty() || clienteSelecionado.equals("Selecione um cliente")
@@ -197,7 +197,7 @@ public class VendasPainel extends JPanel {
                             clientesComboBox.setSelectedIndex(0);
                             carrosComboBox.setSelectedIndex(0);
                             JOptionPane.showMessageDialog(null, "Venda cadastrada com sucesso!");
-                            JOptionPane.showMessageDialog(null, "placa = " + placaSelecionada);
+                            // JOptionPane.showMessageDialog(null, "placa = " + placaSelecionada);
 
                         } catch (ParseException ex) {
                             JOptionPane.showMessageDialog(null,
