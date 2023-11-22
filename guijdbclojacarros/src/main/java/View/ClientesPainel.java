@@ -47,9 +47,11 @@ public class ClientesPainel extends JPanel {
     public ClientesPainel() {
         JPanel painel1 = new JPanel();
         JPanel inputPanel = new JPanel();
+        inputPanel.setBackground(Color.LIGHT_GRAY);
         JPanel buttons = new JPanel();
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         painel1.setLayout(new BorderLayout());
+        buttons.setBackground(Color.LIGHT_GRAY);
 
         // construir a tabela
         tableModel = new DefaultTableModel();
@@ -96,6 +98,7 @@ public class ClientesPainel extends JPanel {
 
         apagarButton = new JButton("Apagar");
         apagarButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        apagarButton.setBackground(Color.RED);
 
         editarButton = new JButton("Editar");
         editarButton.setFont(new Font("Arial", Font.PLAIN, 16));

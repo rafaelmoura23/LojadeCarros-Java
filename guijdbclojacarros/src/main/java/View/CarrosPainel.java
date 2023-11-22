@@ -15,12 +15,11 @@ import javax.swing.table.DefaultTableModel;
 import Controller.CarrosControl;
 import Controller.CarrosDAO;
 
-
-import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import java.awt.*;
 
 import Model.Carros;
 
@@ -41,7 +40,6 @@ public class CarrosPainel extends JPanel {
 
         // entrada de dados
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        add(new JLabel("Cadastro Carros"));
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridLayout(5, 2));
         inputPanel.add(new JLabel("Marca"));
@@ -65,6 +63,18 @@ public class CarrosPainel extends JPanel {
         botoes.add(editar = new JButton("Editar"));
         botoes.add(apagar = new JButton("Apagar"));
 
+        cadastrar.setFont(new Font("Arial", Font.PLAIN, 16));
+        cadastrar.setBackground(Color.green);
+        editar.setFont(new Font("Arial", Font.PLAIN, 16));
+        apagar.setFont(new Font("Arial", Font.PLAIN, 16));
+        apagar.setBackground(Color.red);
+
+        carAnoField.setFont(new Font("Arial", Font.PLAIN, 16));
+        carMarcaField.setFont(new Font("Arial", Font.PLAIN, 16));
+        carModeloField.setFont(new Font("Arial", Font.PLAIN, 16));
+        carValorField.setFont(new Font("Arial", Font.PLAIN, 16));
+
+
         add(botoes);
         // tabela de carros
         JScrollPane jSPane = new JScrollPane();
@@ -73,6 +83,8 @@ public class CarrosPainel extends JPanel {
                 new String[] { "Marca", "Modelo", "Ano", "Placa", "Valor" });
         table = new JTable(tableModel);
         jSPane.setViewportView(table);
+        table.setBackground(Color.LIGHT_GRAY);
+        table.setFont(new Font("Arial", Font.PLAIN, 16));
 
         // Cria o banco de dados caso não tenha sido criado
 

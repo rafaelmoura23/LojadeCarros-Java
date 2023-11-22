@@ -226,7 +226,7 @@ public class VendasPainel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String carroSelecionado = (String) carrosComboBox.getSelectedItem();
                 if (carroSelecionado == null || carroSelecionado.isEmpty() || carroSelecionado.equals("Selecione um Carro")) {
-                    JOptionPane.showMessageDialog(null, "Selecione um registro para apagar.");
+                    JOptionPane.showMessageDialog(null, "Selecione uma venda para apagar.");
                 } else {
                     int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja apagar os campos?",
                             "Confirmação", JOptionPane.YES_NO_OPTION);
