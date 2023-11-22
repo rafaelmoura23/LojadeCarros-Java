@@ -19,11 +19,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
 
-import Controller.CarrosDAO;
+
 import Controller.ClientesControl;
 import Controller.ClientesDAO;
 
-import Model.Carros;
 import Model.Clientes;
 
 public class ClientesPainel extends JPanel {
@@ -84,7 +83,7 @@ public class ClientesPainel extends JPanel {
         labelNome = new JLabel("Nome");
         labelNome.setFont(new Font("Arial", Font.PLAIN, 16));
 
-        labelTelefone = new JLabel("Telefone");
+        labelTelefone = new JLabel("DDD + Telefone");
         labelTelefone.setFont(new Font("Arial", Font.PLAIN, 16));
 
         labelCidade = new JLabel("Cidade");
@@ -150,8 +149,17 @@ public class ClientesPainel extends JPanel {
                 } else {
                     if (!validarFormatoCPF(inputCpf.getText())) {
                         JOptionPane.showMessageDialog(null,
-                                "CPF inválido! O CPF deve conter apenas números e ter 11 dígitos.");
-                    } else {
+                        "CPF inválido! O CPF deve conter apenas números e ter 11 dígitos.");
+                    } else if (!inputTelefone.getText().matches("[0-9]+") || inputTelefone.getText().length() < 11 ) {
+                        JOptionPane.showMessageDialog(null, "O campo 'Telefone' deve conter apenas números.");
+                        JOptionPane.showMessageDialog(null, "Adicione  no seguinte formato 19999999999.");
+                    } else if (!inputNome.getText().matches("[a-zA-ZÀ-ú\\s]+")) {
+                        JOptionPane.showMessageDialog(null, "O campo 'Nome' deve conter apenas letras.");
+                    } else if (!inputCidade.getText().matches("[a-zA-ZÀ-ú\\s]+")) {
+                        JOptionPane.showMessageDialog(null, "O campo 'Cidade' deve conter apenas letras.");
+                    }
+
+                    else {
                         // Chama o método "cadastrar" do objeto operacoes com os valores dos campos de
                         // entrada
                         operacoes.cadastrar(inputCpf.getText(), inputNome.getText(), inputTelefone.getText(),
@@ -167,8 +175,6 @@ public class ClientesPainel extends JPanel {
 
             }
         });
-
-        
 
         editarButton.addActionListener(new ActionListener() {
             @Override
@@ -232,7 +238,7 @@ public class ClientesPainel extends JPanel {
         // Remove caracteres não numéricos do CPF
         cpf = cpf.replaceAll("[^0-9]", "");
 
-        // Verifica se o CPF possui 11 dígitos (considerando os caracteres separadores)
+        // Verifica se o CPF possui 11 dígitos
         return cpf.length() == 11;
     }
 }
