@@ -18,9 +18,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Controller.CarrosControl;
 import Controller.CarrosDAO;
-import Controller.ClientesControl;
 import Controller.ClientesDAO;
 import Controller.VendasControl;
 import Controller.VendasDAO;
@@ -45,9 +43,8 @@ public class VendasPainel extends JPanel {
 
     // campo escrito - JLabel
     private JLabel labelData;
-    private JLabel labelCliente;
     private JLabel labelValor;
-    private JLabel labelCarro;
+
 
     private DefaultTableModel tableModel; // lógica
     private JTable table; // visual

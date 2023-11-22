@@ -15,10 +15,9 @@ import javax.swing.table.DefaultTableModel;
 import Controller.CarrosControl;
 import Controller.CarrosDAO;
 
-import java.awt.AWTException;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;

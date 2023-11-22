@@ -4,7 +4,6 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import Model.Carros;
 import Model.Clientes;
 
 public class ClientesControl {

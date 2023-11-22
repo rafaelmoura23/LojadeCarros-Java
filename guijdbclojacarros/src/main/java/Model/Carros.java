@@ -1,13 +1,15 @@
 package Model;
 
 public class Carros {
-    //Atributos
+
+    // Atributos
     private String marca;
     private String modelo;
     private String ano;
     private String placa;
     private String valor;
-    //Métodos
+
+    // Construtor
     public Carros(String marca, String modelo, String ano, String placa, String valor) {
         this.marca = marca;
         this.modelo = modelo;
@@ -15,7 +17,8 @@ public class Carros {
         this.valor = valor;
         this.placa = placa;
     }
-    //getters and setters
+
+    // getters and setters
     public String getMarca() {
         return marca;
     }
@@ -46,5 +49,4 @@ public class Carros {
     public void setPlaca(String placa) {
         this.placa = placa;
     }
-    
 }

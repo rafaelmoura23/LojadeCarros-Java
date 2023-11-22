@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Connection.ConnectionFactory;
-import Model.Clientes;
 import Model.Vendas;
 
 public class VendasDAO {
