@@ -19,14 +19,14 @@ public class CarrosControl {
     public CarrosControl(List<Carros> carros, DefaultTableModel tableModel, JTable table) {
         this.carros = carros; // Inicializa a lista de carros
         this.tableModel = tableModel; // Inicializa o modelo da tabela
-        this.table = table; // Inicializa a tabela Swing
+        this.table = table; // Inicializa a tabela
     }
 
     // Método para atualizar a tabela de exibição com dados do banco de dados
     private void atualizarTabela() {
         tableModel.setRowCount(0); // Limpa todas as linhas existentes na tabela
         carros = new CarrosDAO().listarTodos(); // Obtém os carros atualizados do banco de dados
-        for (Carros carro : carros) {
+        for (Carros carro : carros) { //foreach para percorrer a lista de carros
             // Adiciona os dados de cada carro como uma nova linha na tabela Swing
             tableModel.addRow(new Object[] { carro.getMarca(), carro.getModelo(), carro.getAno(), carro.getPlaca(), carro.getValor() });
         }
