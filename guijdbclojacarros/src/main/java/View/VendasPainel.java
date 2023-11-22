@@ -81,6 +81,8 @@ public class VendasPainel extends JPanel {
         table = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setViewportView(table);
+        table.setBackground(Color.LIGHT_GRAY);
+        table.setFont(new Font("Arial", Font.PLAIN, 16));
 
         // criar os componentes
         // inputCliente = new JTextField(20);
@@ -103,10 +105,11 @@ public class VendasPainel extends JPanel {
         // botões
         cadastrarButton = new JButton("Comprar");
         cadastrarButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        cadastrarButton.setBackground(Color.green);
 
         apagarButton = new JButton("Apagar");
         apagarButton.setFont(new Font("Arial", Font.PLAIN, 16));
-
+        apagarButton.setBackground(Color.red);
         atualizarButton = new JButton("Atualizar");
         atualizarButton.setFont(new Font("Arial", Font.PLAIN, 16));
 

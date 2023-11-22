@@ -73,6 +73,7 @@ public class CarrosPainel extends JPanel {
         carMarcaField.setFont(new Font("Arial", Font.PLAIN, 16));
         carModeloField.setFont(new Font("Arial", Font.PLAIN, 16));
         carValorField.setFont(new Font("Arial", Font.PLAIN, 16));
+        carPlacaField.setFont(new Font("Arial", Font.PLAIN, 16));
 
 
         add(botoes);
