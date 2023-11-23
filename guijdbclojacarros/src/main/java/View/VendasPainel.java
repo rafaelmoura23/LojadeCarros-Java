@@ -45,7 +45,6 @@ public class VendasPainel extends JPanel {
     private JLabel labelData;
     private JLabel labelValor;
 
-
     private DefaultTableModel tableModel; // lógica
     private JTable table; // visual
     private List<Vendas> vendas = new ArrayList<>();
@@ -91,6 +90,8 @@ public class VendasPainel extends JPanel {
         inputData.setFont(new Font("Arial", Font.PLAIN, 16));
 
         inputCarro = new JTextField(20);
+
+        inputCliente = new JTextField(20);
 
         inputValor = new JTextField(10);
         inputValor.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -142,7 +143,7 @@ public class VendasPainel extends JPanel {
         clientes = new ClientesDAO().listarTodos();
         // criar um método para atualizar o combobox
         for (Clientes cliente : clientes) {
-            clientesComboBox.addItem(cliente.getNome() + " " + cliente.getCpf());
+            clientesComboBox.addItem(cliente.getNome());
         }
 
         // carros = new CarrosDAO().listarTodos();
@@ -167,10 +168,8 @@ public class VendasPainel extends JPanel {
             public void mouseClicked(MouseEvent evt) {
                 linhaSelecionada = table.rowAtPoint(evt.getPoint());
                 if (linhaSelecionada != -1) {
-                    inputData.setText((String) table.getValueAt(linhaSelecionada, 0));
-                    inputCliente.setText((String) table.getValueAt(linhaSelecionada, 1));
-                    inputValor.setText((String) table.getValueAt(linhaSelecionada, 2));
-                    inputCarro.setText((String) table.getValueAt(linhaSelecionada, 3));
+                    inputData.setText((String) table.getValueAt(linhaSelecionada, 1));
+                    inputValor.setText((String) table.getValueAt(linhaSelecionada, 3));
                 }
             }
         });
@@ -204,9 +203,7 @@ public class VendasPainel extends JPanel {
                             if (!data.equals(dateFormat.format(parsedDate))) {
                                 throw new ParseException("Formato inválido", 0);
                             }
-
-                            String cliente = clienteSelecionado.split(" ")[0];
-                            operacoes.cadastrar(data, cliente, valor, carroSelecionado);
+                            operacoes.cadastrar(data, clienteSelecionado, valor, carroSelecionado);
                             inputData.setText("");
                             inputValor.setText("");
                             clientesComboBox.setSelectedIndex(0);
@@ -248,6 +245,7 @@ public class VendasPainel extends JPanel {
                 }
             }
         });
+
         
 
         // atualizar as comboBox com os valores atuais
@@ -268,7 +266,7 @@ public class VendasPainel extends JPanel {
         vendas = new VendasDAO().listarTodos();
         for (Vendas venda : vendas) {
             tableModel.addRow(
-                    new Object[] { venda.getCliente(), venda.getData(), venda.getTipoCarro(), venda.getValor() });
+                    new Object[] { venda.getCliente(), venda.getData(), venda.getCarro(), venda.getValor() });
         }
 
     }
@@ -279,7 +277,7 @@ public class VendasPainel extends JPanel {
         clientesComboBox.addItem("Selecione um cliente");
         clientes = new ClientesDAO().listarTodos();
         for (Clientes cliente : clientes) {
-            clientesComboBox.addItem(cliente.getNome() + " " + cliente.getCpf());
+            clientesComboBox.addItem(cliente.getNome());
         }
     }
 

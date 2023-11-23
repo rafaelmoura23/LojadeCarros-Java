@@ -26,7 +26,7 @@ public class VendasControl {
         tableModel.setRowCount(0); // Limpa todas as linhas existentes na tabela
         vendas = new VendasDAO().listarTodos(); // Obtém os carros atualizados do banco de dados
         for (Vendas venda : vendas) {
-            tableModel.addRow(new Object[] { venda.getData(), venda.getCliente(), venda.getValor(), venda.getTipoCarro()});
+            tableModel.addRow(new Object[] { venda.getData(), venda.getCliente(), venda.getValor(), venda.getCarro()});
         }
     }
 

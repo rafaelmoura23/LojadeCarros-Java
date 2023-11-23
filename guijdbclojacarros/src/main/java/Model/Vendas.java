@@ -6,14 +6,14 @@ public class Vendas {
     private String data;
     private String cliente;
     private String valor;
-    private String tipoCarro;
+    private String carro;
     
     // construtor
-    public Vendas(String data, String cliente, String valor, String tipoCarro) {
+    public Vendas(String data, String cliente, String valor, String carro) {
         this.data = data;
         this.cliente = cliente;
         this.valor = valor;
-        this.tipoCarro = tipoCarro;
+        this.carro = carro;
     }
 
     // getters and setters
@@ -41,12 +41,12 @@ public class Vendas {
         this.valor = valor;
     }
 
-    public String getTipoCarro() {
-        return tipoCarro;
+    public String getCarro() {
+        return carro;
     }
 
-    public void setTipoCarro(String tipoCarro) {
-        this.tipoCarro = tipoCarro;
+    public void setCarro(String carro) {
+        this.carro = carro;
     }
 
 }
