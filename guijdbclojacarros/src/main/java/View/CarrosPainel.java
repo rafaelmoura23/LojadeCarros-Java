@@ -124,7 +124,7 @@ public class CarrosPainel extends JPanel {
                     // if para verificar se o campo ano contém apenas números, falta verificar length
                     if (!carAnoField.getText().matches("[0-9]+")) {
                         JOptionPane.showMessageDialog(null, "O campo 'Ano' deve conter apenas números.");
-                    } else if(!carValorField.getText().matches("[0-9]+")){
+                    } else if(!carValorField.getText().matches("[0-9]+([,.][0-9]+)?")){
                         // if para verificar se o campo valor contém apenas números, falta verificar length
                         JOptionPane.showMessageDialog(null, "O campo 'Valor' deve conter apenas números.");
                     } else{

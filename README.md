@@ -2,6 +2,8 @@
 
 <p align = "center">
   
-### Ao iniciar o aplicativo, a tela a baixo será visualizada, para navegar para as próximas páginas, clique no botão `Go to the Car store!`
+### Ao iniciar o aplicativo, a tela abaixo será visualizada, para navegar para as próximas páginas, clique no botão `Go to the Car store!`
 <img width="1200" height="450" src="img\initial_panel.gif" >
 
+### Na tela abaixo está sendo mostrada a página de cadastro. Quando todos os campos estão preenchidos e o botão cadastrar é clicado, o carro aparece na tabela, sendo cadastrado também em um banco de dados. obs: preencha os dados corretamente de acordo com as validações.
+<img width="1200" height="450" src="img\carros.gif" >
