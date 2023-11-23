@@ -37,9 +37,9 @@ public class VendasPainel extends JPanel {
     // atributos - componentes
     // campo de texto - JTextField
     private JTextField inputData;
-    private JTextField inputCliente;
+    // private JTextField inputCliente;
     private JTextField inputValor;
-    private JTextField inputCarro;
+    // private JTextField inputCarro;
 
     // campo escrito - JLabel
     private JLabel labelData;
@@ -62,6 +62,8 @@ public class VendasPainel extends JPanel {
         JPanel painel1 = new JPanel(new BorderLayout());
         JPanel inputPanel = new JPanel();
         JPanel buttons = new JPanel();
+
+        // this.setBackground(Color.LIGHT_GRAY);
 
         carrosComboBox = new JComboBox<>();
         carrosComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -89,9 +91,9 @@ public class VendasPainel extends JPanel {
         inputData = new JTextField(10);
         inputData.setFont(new Font("Arial", Font.PLAIN, 16));
 
-        inputCarro = new JTextField(20);
+        // inputCarro = new JTextField(20);
 
-        inputCliente = new JTextField(20);
+        // inputCliente = new JTextField(20);
 
         inputValor = new JTextField(10);
         inputValor.setFont(new Font("Arial", Font.PLAIN, 16));
