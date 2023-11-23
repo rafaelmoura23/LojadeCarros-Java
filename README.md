@@ -9,4 +9,4 @@
 <img width="1200" height="450" src="img\carros.gif" >
 
 ### Na tela de `cadastro de clientes`, quando todos os campos foram preenchidos corretamente e o botão `cadastrar` é clicado, o cliente aparece na tabela também sendo cadastrado no banco de dados. `obs: preencha os dados corretamente de acordo com as validações.`
-<img width="1200" height="450" src="img\clientes.gif" >
+<img width="1200" height="450" src="img\clientes.gif">
