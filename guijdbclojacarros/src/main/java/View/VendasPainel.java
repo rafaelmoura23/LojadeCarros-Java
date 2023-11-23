@@ -3,6 +3,7 @@ package View;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -62,6 +63,10 @@ public class VendasPainel extends JPanel {
         JPanel painel1 = new JPanel(new BorderLayout());
         JPanel inputPanel = new JPanel();
         JPanel buttons = new JPanel();
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        // painel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro de Vendas"));
+        inputPanel.setBackground(Color.LIGHT_GRAY);
 
         // this.setBackground(Color.LIGHT_GRAY);
 
@@ -84,6 +89,7 @@ public class VendasPainel extends JPanel {
         scrollPane.setViewportView(table);
         table.setBackground(Color.LIGHT_GRAY);
         table.setFont(new Font("Arial", Font.PLAIN, 16));
+        // table.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         // criar os componentes
         // inputCliente = new JTextField(20);
