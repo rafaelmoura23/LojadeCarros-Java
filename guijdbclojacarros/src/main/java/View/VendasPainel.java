@@ -2,6 +2,7 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -27,7 +28,7 @@ import Controller.VendasDAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.util.HashSet;
 import java.awt.*;
 
 import Model.Carros;
@@ -112,7 +113,7 @@ public class VendasPainel extends JPanel {
         labelValor.setFont(new Font("Arial", Font.PLAIN, 16));
 
         // botões
-        cadastrarButton = new JButton("Comprar");
+        cadastrarButton = new JButton("Efetuar Venda");
         cadastrarButton.setFont(new Font("Arial", Font.PLAIN, 16));
         cadastrarButton.setBackground(Color.green);
 
@@ -130,7 +131,7 @@ public class VendasPainel extends JPanel {
         inputPanel.add(inputValor);
 
         buttons.add(cadastrarButton);
-        buttons.add(apagarButton);
+        // buttons.add(apagarButton);
         buttons.add(atualizarButton);
 
         this.add(painel1);
@@ -193,7 +194,6 @@ public class VendasPainel extends JPanel {
                 String clienteSelecionado = (String) clientesComboBox.getSelectedItem(); // pegar o cliente selecionado no ComboBox
                 String carroSelecionado = (String) carrosComboBox.getSelectedItem(); // pegar o carro selecionado noComboBox
                 // String placaSelecionada = (String) placasComboBox.getSelectedItem();
-                                                            
 
                 // lógica para os campos vazios, incluindo a combobox não selecionada
                 if (data.isEmpty() || valor.isEmpty() || clienteSelecionado.equals("Selecione um cliente") || carroSelecionado.equals("Selecione um Carro")) {
@@ -209,7 +209,7 @@ public class VendasPainel extends JPanel {
                             // Tentar fazer o parse da data para verificar se é uma data válida
                             Date parsedDate = dateFormat.parse(data);
                             if (!data.equals(dateFormat.format(parsedDate))) {
-                                throw new ParseException("Formato inválido", 0);
+                                throw new ParseException("Formato inválido",0);
                             }
                             operacoes.cadastrar(data, clienteSelecionado, valor, carroSelecionado);
                             inputData.setText("");
