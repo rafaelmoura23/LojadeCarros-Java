@@ -42,6 +42,35 @@
 
   - Resumidamente, essa classe oferece métodos estáticos para obter conexões com o banco de dados PostgreSQL, bem como para fechar conexões, declarações preparadas (PreparedStatement) e resultados (ResultSet). Essa abordagem visa a reutilização de código e o encapsulamento de lógica de gerenciamento de conexão, facilitando o desenvolvimento e manutenção de aplicações Java que interagem com bancos de dados PostgreSQL.
 
-## 2. Controller
+<h2> Controller </h2>
+
+  - A classe Control controla as interações entre a interface de usuário (UI) e operações relacionadas a carros armazenados em um banco de dados. 
+
+  - Atributos:
+    - carros: Armazena uma lista de objetos do tipo Carros.
+    - tableModel: Representa o modelo da tabela Swing para exibir os dados.
+    - table: É a tabela Swing onde os dados dos carros são mostrados.
+
+  - Método atualizarTabela():
+    - Limpa as linhas existentes na tabela.
+    - Obtém os dados atualizados dos carros a partir do banco de dados usando um CarrosDAO.
+    - Popula a tabela Swing com os dados dos carros, adicionando cada carro como uma nova linha na tabela.
+
+  - Método cadastrar(String marca, String modelo, String ano, String placa, String valor):
+    - Chama o método de cadastro no banco de dados usando um CarrosDAO.
+    - Após o cadastro, atualiza a tabela de exibição chamando o método atualizarTabela().
+  
+  - Método atualizar(String marca, String modelo, String ano, String placa, String valor):
+    - Chama o método de atualização no banco de dados usando um CarrosDAO.
+    - Após a atualização, atualiza a tabela de exibição chamando o método atualizarTabela().
+  
+  - Método apagar(String placa):
+    - Chama o método de exclusão no banco de dados usando um CarrosDAO.
+    - Após a exclusão, atualiza a tabela de exibição chamando o método atualizarTabela().
+  
+  - Em resumo, a classe Control atua como um controlador entre a interface do usuário e as operações de manipulação de dados no banco de dados. Ela utiliza um objeto para realizar operações de cadastro, atualização e exclusão no banco de dados, ao mesmo tempo que atualiza a tabela Swing com os dados atualizados após cada operação.
+
+
+<h2> Classe DAO </h2>
 ## 3. Model
 ## 4. View
