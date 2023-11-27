@@ -101,6 +101,60 @@
   
   - Em resumo, a classe Control atua como um controlador entre a interface do usuário e as operações de manipulação de dados no banco de dados. Ela utiliza um objeto para realizar operações de cadastro, atualização e exclusão no banco de dados, ao mesmo tempo que atualiza a tabela Swing com os dados atualizados após cada operação.
 
-
-<h2> Model </h2>
 <h2> View </h2>
+  - Representa a classe ClientesPainel, uma interface gráfica de usuário (GUI) para gerenciar informações de clientes.
+
+  - Componentes Visuais:
+    - Utiliza JTextField para entrada de dados referentes a CPF, nome, telefone e cidade do cliente.
+    - Usa JLabel para indicar os campos correspondentes aos valores a serem inseridos.
+    - Contém uma tabela JTable para exibir os dados dos clientes cadastrados.
+
+  - Operações de Interface:
+    - Possui botões para cadastrar, editar e apagar clientes.
+    - Validações são aplicadas nos campos de entrada para garantir formatos adequados (CPF, telefone, nome, cidade).
+    - Exibe mensagens de erro ou sucesso dependendo das operações executadas.
+    - A interação com a tabela permite a seleção de linhas para edição ou exclusão.
+
+  - Interação com o Banco de Dados:
+    - Ao iniciar, cria a tabela no banco de dados através da classe ClientesDAO.
+    - Utiliza métodos da classe ClientesControl para realizar operações como cadastrar, atualizar e apagar clientes no banco de dados.
+    - A cada operação, atualiza a tabela na interface para refletir as mudanças no banco de dados.
+
+  - Validações Específicas:
+    - Verifica se os campos estão preenchidos antes de cadastrar um novo cliente.
+    - Realiza validações específicas para formatos de CPF, telefone, nome e cidade.
+
+  - Atualização da Tabela de Clientes:
+    - Possui um método atualizarTabela() que atualiza os dados na tabela de clientes a partir do banco de dados.
+
+  - Em resumo, essa classe ClientesPainel oferece uma interface interativa para gerenciar operações relacionadas aos clientes, como cadastro, edição e exclusão, mantendo a interface sincronizada com os dados armazenados no banco de dados.
+
+<h2> View Vendas </h2>
+
+  - Representa a classe VendasPainel, uma interface gráfica de usuário (GUI) para gerenciar registros de vendas. Aqui está um resumo das principais funcionalidades:
+
+  - Componentes Visuais:
+    - Utiliza componentes Swing como JTextField, JLabel, JComboBox, JButton para entrada de dados, exibição e interação do usuário.
+    - Inclui uma tabela JTable para mostrar os registros de vendas.
+
+  - Operações de Interface:
+    - Fornece campos para inserir informações como data da venda e valor.
+    - Permite a seleção de clientes e carros por meio de JComboBox para associá-los à venda.
+    - Inclui botões para cadastrar vendas, atualizar e excluir registros.
+
+  - Interação com o Banco de Dados:
+    - Utiliza classes DAO (VendasDAO, CarrosDAO, ClientesDAO) para interagir com o banco de dados, realizando operações como cadastro, exclusão e listagem de vendas, carros e clientes.
+    - Atualiza a tabela de vendas na interface para refletir as mudanças no banco de dados.
+
+  - Validações de Entrada:
+    - Realiza validações nos campos de data e valor para garantir formatos adequados.
+    - Fornece feedback ao usuário sobre os campos que devem ser preenchidos corretamente.
+
+  - Funcionalidades Adicionais:
+    - Inclui métodos para atualizar as JComboBox de clientes e carros, garantindo que os dados estejam sempre atualizados na interface.
+
+  - Interação com o Usuário:
+    - Permite a seleção de uma venda na tabela para visualização ou modificação dos dados.
+    - Apresenta mensagens de confirmação para garantir a exclusão correta de vendas.
+
+  - Em resumo, a classe VendasPainel fornece uma interface interativa para registrar, visualizar e gerenciar vendas, integrando-se ao banco de dados e proporcionando uma experiência de usuário para manipular informações de vendas.
