@@ -17,3 +17,10 @@
 
 ### 4. Na tela de `transações/vendas` podemos efetuar a `venda de um carro para determinado cliente`, também é necessário colocar uma data de acordo com as normas dd/mm/yyyy, e inserir um valor.
 <img src="img\vendas.gif">
+
+<h1 align="center"> II. Documentação do Código: <h2/>
+
+## 1. Connection
+## 2. Controller
+## 3. Model
+## 4. View
