@@ -11,5 +11,5 @@
 ### 3. Na tela de `cadastro de clientes`, quando todos os campos foram preenchidos corretamente e o botão `cadastrar` é clicado, o cliente aparece na tabela também sendo cadastrado no banco de dados. `obs: preencha os dados corretamente de acordo com as validações.`
 <img src="img\clientes.gif">
 
-### 3. 
+### 4. Na tela de `transações/vendas` podemos efetuar a `venda de um carro para determinado cliente`, também é necessário colocar uma data de acordo com as normas dd/mm/yyyy, e inserir um valor.
 <img src="img\vendas.gif">
