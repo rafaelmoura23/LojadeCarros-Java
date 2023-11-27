@@ -1,6 +1,10 @@
-# Loja de Carros 🚗
+<h1 align="center"> Loja de Carros em JAVA 🚗 </h1> 
 
-<p align = "center">
+## I. Manual de Utilização 📃
+## II. Documentação do Código ⚙️
+
+
+<h1 align="center"> I. Manual de utilização para o Usuário: <h2/>
   
 ### 1. Ao iniciar o aplicativo, a tela abaixo será visualizada, para navegar para as próximas páginas, clique no botão `Go to the Car store!`
 <img src="img\initial_panel.gif" >
