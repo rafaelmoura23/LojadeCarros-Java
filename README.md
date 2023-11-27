@@ -1,7 +1,7 @@
 <h1 align="center"> Loja de Carros em JAVA 🚗 </h1> 
 
 
-<h1 align="center"> I. Manual de utilização para o Usuário: <h2/>
+<h2 align="center"> I. Manual de utilização para o Usuário: <h2/>
   
 ### 1. Ao iniciar o aplicativo, a tela abaixo será visualizada, para navegar para as próximas páginas, clique no botão `Go to the Car store!`
 <img src="img\initial_panel.gif" >
@@ -15,7 +15,7 @@
 ### 4. Na tela de `transações/vendas` podemos efetuar a `venda de um carro para determinado cliente`, também é necessário colocar uma data de acordo com as normas dd/mm/yyyy, e inserir um valor.
 <img src="img\vendas.gif">
 
-<h1 align="center"> II. Documentação do Código: <h2/>
+<h2 align="center"> II. Documentação do Código: <h2/>
 
 <h2> Connection </h2>
 
